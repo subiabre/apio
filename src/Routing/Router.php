@@ -12,8 +12,8 @@ class Router
     public $response;
 
     /**
-     * @param string $requestClass The classname of the Request objects
-     * @param string $responseClass The classname of the Response objects
+     * @param Request $request The Request instance to be used by the Router
+     * @param Response $response The Response instance to be used by the Router
      */
     public function __construct(Request $request, Response $response)
     {
