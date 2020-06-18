@@ -33,5 +33,11 @@
     "autoload-dev": {
         "psr-4": { "Apio\\Tests\\": "tests/" }
     },
-    "bin": ["apio"]
+    "bin": ["apio"],
+    "scripts": {
+        "test": [
+            "Composer\\Config::disableProcessTimeout",
+            "./vendor/bin/phpunit"
+        ]
+    }
 }
