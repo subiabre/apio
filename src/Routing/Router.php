@@ -85,6 +85,17 @@ class Router
     }
 
     /**
+     * Import routes from a controller class
+     * @param Controller $controller Controller class with the routes defined inside `routes()`
+     */
+    public function use(Controller $controller)
+    {
+        $controller->routes();
+
+        $this->routeList = \array_merge($this->routeList, $controller->router->routeList);
+    }
+
+    /**
      * Add a new route to listen for
      * @param string $method HTTP verb
      * @param string $path An URI to be matched against
