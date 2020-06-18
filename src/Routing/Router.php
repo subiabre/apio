@@ -50,4 +50,32 @@ class Router
 
         return $dispatcher;
     }
+    
+    public function listen()
+    {
+        $dispatcher = $this->buildDispatcher();
+
+        $match = $dispatcher->dispatch(
+            $this->request->getMethod(),
+            $this->request->getRequestUri()
+        );
+
+        switch ($match[0]) {
+            case Dispatcher::NOT_FOUND:
+                // ... 404 Not Found
+                break;
+            case Dispatcher::METHOD_NOT_ALLOWED:
+                $allowedMethods = $match[1];
+                // ... 405 Method Not Allowed
+                break;
+            case Dispatcher::FOUND:
+                $handler = $match[1];
+                $vars = $match[2];
+                
+                $res = $handler($this->request, $this->response);
+                $res->send();
+                
+                break;
+        }
+    }
 }
