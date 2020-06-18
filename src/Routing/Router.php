@@ -78,4 +78,19 @@ class Router
                 break;
         }
     }
+
+    /**
+     * Add a new route to listen for
+     * @param string $method HTTP verb
+     * @param string $path An URI to be matched against
+     * @param callable $fn The handler function to be executed
+     */
+    public function addRoute(string $method, string $path, callable $fn)
+    {
+        \array_push($this->routeList, [
+            'method' => $method,
+            'path' => $path,
+            'handler' => $fn
+        ]);
+    }
 }
