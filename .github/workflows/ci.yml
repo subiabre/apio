@@ -16,6 +16,4 @@ jobs:
 
     steps:
     - name: PHPUnit tests
-      uses: php-actions/phpunit@v1
-      with:
-        config: phpunit.xml
+      run: composer run-script test
