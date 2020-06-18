@@ -36,4 +36,16 @@ class RouterTest extends TestCase
 
         $this->assertInstanceOf(Dispatcher::class, $dispatcher);
     }
+
+    public function testAddsRoutesToTheList()
+    {
+        $router = new Router();
+        
+        $router->addRoute('GET', '/', fn() => 'OK');
+
+        $this->assertIsArray($router->routeList);
+        $this->assertSame('GET', $router->routeList[0]['method']);
+        $this->assertSame('/', $router->routeList[0]['path']);
+        $this->assertSame('OK', $router->routeList[0]['handler']());
+    }
 }
