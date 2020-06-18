@@ -4,7 +4,6 @@ namespace Apio\Routing;
 
 use FastRoute\Dispatcher;
 use FastRoute\RouteCollector;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -25,7 +24,7 @@ class Router
     public function __construct(Request $request = NULL, Response $response = NULL)
     {
         $this->request = $request ? $request : new Request();
-        $this->response = $response ? $response : new JsonResponse();
+        $this->response = $response ? $response : new Response();
 
         $this->request = $this->request::createFromGlobals();
     }
@@ -65,11 +64,18 @@ class Router
 
         switch ($match[0]) {
             case Dispatcher::NOT_FOUND:
-                // ... 404 Not Found
+                
+                $this->response->error($this->response::NOT_FOUND_MESSAGE);
+                $this->response->send();
+
                 break;
             case Dispatcher::METHOD_NOT_ALLOWED:
                 $allowedMethods = $match[1];
-                // ... 405 Method Not Allowed
+
+                $this->response->error($this->response::METHOD_NOT_ALLOWED_MESSAGE);
+                $this->response->error(['methods' => $allowedMethods]);
+                $this->response->send();
+
                 break;
             case Dispatcher::FOUND:
                 $handler = $match[1];
