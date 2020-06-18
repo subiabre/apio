@@ -31,5 +31,9 @@
     },
     "autoload-dev": {
         "psr-4": { "Apio\\Tests\\": "tests/" }
+    },
+    "bin": ["apio"],
+    "config": {
+        "bin-dir": "./"
     }
 }
