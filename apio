@@ -46,9 +46,11 @@ if (!defined('APIO_VENDOR_AUTOLOAD')) {
 require APIO_VENDOR_AUTOLOAD;
 
 use Apio\Console\Commands;
+use SebastianBergmann\Version;
 use Symfony\Component\Console\Application;
 
-$console = new Application('APIO', 'v0.1');
+$version = new Version('0.1', __DIR__);
+$console = new Application('APIO', $version->getVersion());
 
 $console->addCommands((new Commands)->getCommands());
 
