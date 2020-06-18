@@ -81,7 +81,9 @@ class Router
                 $handler = $match[1];
                 $vars = $match[2];
 
-                $handler($this->request, $this->response, $vars);
+                $this->request->query->add($vars);
+
+                $handler($this->request, $this->response);
                 
                 break;
         }
