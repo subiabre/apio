@@ -1,0 +1,55 @@
+#!/usr/bin/env php
+<?php
+
+/**
+ * This file is the binary runner for the Apio console application
+ * 
+ * Visit and learn about the Apio project at
+ * https://github.com/subiabre/apio
+ * 
+ * By Facundo Subiabre, email: subiabrewd at gmail dot com.
+ */
+
+// Find composer autoload
+$level = 1;
+while ($level < 6) {
+    $file = \dirname(__DIR__, $level) . '/vendor/autoload.php';
+
+    if (\file_exists($file)) {
+        define('APIO_VENDOR_AUTOLOAD', $file);
+
+        break;
+    }
+
+    $level++;
+}
+
+if (!defined('APIO_VENDOR_AUTOLOAD')) {
+    $file = __DIR__ . '/vendor/autoload.php';
+
+    if (\file_exists($file)) {
+        define('APIO_VENDOR_AUTOLOAD', $file);
+    }
+}
+
+// No autoload found
+if (!defined('APIO_VENDOR_AUTOLOAD')) {
+    fwrite(
+        STDERR,
+        'You need to set up the project dependencies using Composer:' . PHP_EOL .
+        '   composer install' . PHP_EOL . PHP_EOL
+    );
+
+    die(1);
+}
+
+require APIO_VENDOR_AUTOLOAD;
+
+use Apio\Console\PHPUnit;
+use Symfony\Component\Console\Application;
+
+$console = new Application('APIO', 'v0.1');
+
+$console->add(new PHPUnit());
+
+$console->run();
