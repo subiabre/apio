@@ -4,8 +4,8 @@ namespace Apio\Routing;
 
 use FastRoute\Dispatcher;
 use FastRoute\RouteCollector;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request as HttpRequest;
+use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 use function FastRoute\simpleDispatcher;
 
@@ -21,9 +21,9 @@ class Router
      * @param Request $request The Request instance to be used by the Router
      * @param Response $response The Response instance to be used by the Router
      */
-    public function __construct(Request $request = NULL, Response $response = NULL)
+    public function __construct(HttpRequest $request = NULL, HttpResponse $response = NULL)
     {
-        $this->request = $request ? $request : new Request();
+        $this->request = $request ? $request : new HttpRequest();
         $this->response = $response ? $response : new Response();
 
         $this->request = $this->request::createFromGlobals();
