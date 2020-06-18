@@ -3,6 +3,7 @@
 namespace Apio\Tests\Routing;
 
 use Apio\Routing\Router;
+use FastRoute\Dispatcher;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,5 +27,13 @@ class RouterTest extends TestCase
 
         $this->assertInstanceOf(Request::class, $router->request);
         $this->assertInstanceOf(Response::class, $router->response);
+    }
+
+    public function testBuildDispatcher()
+    {
+        $router = new Router();
+        $dispatcher = $router->buildDispatcher();
+
+        $this->assertInstanceOf(Dispatcher::class, $dispatcher);
     }
 }
