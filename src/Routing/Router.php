@@ -74,10 +74,8 @@ class Router
             case Dispatcher::FOUND:
                 $handler = $match[1];
                 $vars = $match[2];
-                
-                $this->request->query->add($vars);
 
-                $handler($this->request, $this->response);
+                $handler($this->request, $this->response, $vars);
                 
                 break;
         }
