@@ -51,6 +51,9 @@ class Router
         return $dispatcher;
     }
     
+    /**
+     * Builds routes dispatcher and handles the route matches
+     */
     public function listen()
     {
         $dispatcher = $this->buildDispatcher();
@@ -72,6 +75,8 @@ class Router
                 $handler = $match[1];
                 $vars = $match[2];
                 
+                $this->request->query->add($vars);
+
                 $res = $handler($this->request, $this->response);
                 $res->send();
                 
