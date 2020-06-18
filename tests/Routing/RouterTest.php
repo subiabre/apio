@@ -9,11 +9,22 @@ use Symfony\Component\HttpFoundation\Response;
 
 class RouterTest extends TestCase
 {
-    public function testTakesRequestAndResponseClassesOnConstructor()
+    public function testTakesRequestAndResponseInstancesOnConstructor()
     {
         $router = new Router(new Request, new Response);
 
         $this->assertObjectHasAttribute('request', $router);
         $this->assertObjectHasAttribute('response', $router);
+    }
+
+    public function testMakesDefaultInstancesOnConstructor()
+    {
+        $router = new Router();
+
+        $this->assertObjectHasAttribute('request', $router);
+        $this->assertObjectHasAttribute('response', $router);
+
+        $this->assertInstanceOf(Request::class, $router->request);
+        $this->assertInstanceOf(Response::class, $router->response);
     }
 }
