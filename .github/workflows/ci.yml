@@ -15,6 +15,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: PHPUnit tests
+    - name: Install dev
       run: composer install --dev --prefer-dist
+    - name: PHPUnit tests
       run: composer run-script test
