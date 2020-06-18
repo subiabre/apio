@@ -77,8 +77,7 @@ class Router
                 
                 $this->request->query->add($vars);
 
-                $res = $handler($this->request, $this->response);
-                $res->send();
+                $handler($this->request, $this->response);
                 
                 break;
         }
