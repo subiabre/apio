@@ -10,8 +10,8 @@ class AppCommands
     public function getCommands(): array
     {
         return [
-            new PHPUnit(),
-            new Server()
+            new Test(),
+            new Serve()
         ];
     }
 }
