@@ -5,7 +5,7 @@ namespace Apio\Console;
 /**
  * Contains the list of commands available to the console
  */
-class AppCommands
+class Commands
 {
     public function getCommands(): array
     {

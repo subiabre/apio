@@ -45,11 +45,11 @@ if (!defined('APIO_VENDOR_AUTOLOAD')) {
 
 require APIO_VENDOR_AUTOLOAD;
 
-use Apio\Console\AppCommands;
+use Apio\Console\Commands;
 use Symfony\Component\Console\Application;
 
 $console = new Application('APIO', 'v0.1');
 
-$console->addCommands((new AppCommands)->getCommands());
+$console->addCommands((new Commands)->getCommands());
 
 $console->run();
