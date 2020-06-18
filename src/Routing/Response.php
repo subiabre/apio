@@ -32,10 +32,10 @@ class Response extends JsonResponse
 
     /**
      * Set data body for the response
-     * @param $data Data body
+     * @param array $data Data body
      * @param int $status HTTP status code
      */
-    public function data($data, int $status = 200)
+    public function data(array $data, int $status = 200)
     {
         $this->dataArray = \array_merge($this->dataArray, $data);
 
