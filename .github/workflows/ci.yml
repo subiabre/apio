@@ -4,18 +4,10 @@ on:
   [push]
 
 jobs:
-  build-test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
     - uses: php-actions/composer@v1
-  
-  unit-test:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Install dev
-      run: composer install --dev --prefer-dist
-    - name: PHPUnit tests
-      run: composer run-script test
+    - uses: php-actions/phpunit@v1
