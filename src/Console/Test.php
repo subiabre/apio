@@ -7,7 +7,10 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class PHPUnit extends Command
+/**
+ * Run PHPUnit
+ */
+class Test extends Command
 {
     protected function configure()
     {
