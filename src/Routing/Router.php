@@ -15,9 +15,9 @@ class Router
      * @param Request $request The Request instance to be used by the Router
      * @param Response $response The Response instance to be used by the Router
      */
-    public function __construct(Request $request, Response $response)
+    public function __construct(Request $request = NULL, Response $response = NULL)
     {
-        $this->request = $request;
-        $this->response = $response;
+        $this->request = $request ? $request : new Request();
+        $this->response = $response ? $response : new Response();
     }
 }
