@@ -11,12 +11,9 @@ class RouterTest extends TestCase
 {
     public function testTakesRequestAndResponseClassesOnConstructor()
     {
-        $router = new Router(Request::class, Response::class);
+        $router = new Router(new Request, new Response);
 
-        $this->assertObjectHasAttribute('requestClass', $router);
-        $this->assertObjectHasAttribute('responseClass', $router);
-
-        $this->assertSame(Request::class, $router->requestClass);
-        $this->assertSame(Response::class, $router->responseClass);
+        $this->assertObjectHasAttribute('request', $router);
+        $this->assertObjectHasAttribute('response', $router);
     }
 }
