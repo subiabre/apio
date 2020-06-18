@@ -49,7 +49,7 @@ use Apio\Console\Commands;
 use SebastianBergmann\Version;
 use Symfony\Component\Console\Application;
 
-$version = new Version('0.1', __DIR__);
+$version = new Version('X.Y.Z', __DIR__);
 $console = new Application('APIO', $version->getVersion());
 
 $console->addCommands((new Commands)->getCommands());
