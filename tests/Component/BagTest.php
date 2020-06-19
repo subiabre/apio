@@ -40,4 +40,17 @@ class BagTest extends TestCase
         $this->assertObjectHasAttribute('serializer', $bag);
         $this->assertInstanceOf(Serializer::class ,$bag->serializer);
     }
+
+    public function testSerialization()
+    {
+        $bag = new Bag;
+
+        $bag->name = 'John';
+        $bag->age = '33';
+
+        $expectedJson = \json_encode(['name' => 'John', 'age' => '33']);
+        $actualJson = $bag->jsonSerialize();
+
+        $this->assertJsonStringEqualsJsonString($expectedJson, $actualJson);
+    }
 }
