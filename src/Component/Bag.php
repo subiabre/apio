@@ -2,7 +2,6 @@
 
 namespace Apio\Component;
 
-use JsonSerializable;
 use Symfony\Component\Serializer\Serializer;
 
 /**
