@@ -1,6 +1,6 @@
 <?php
 
-namespace Apio\Test\Console;
+namespace Apio\Tests\Console;
 
 use Apio\Console\Commands;
 use PHPUnit\Framework\TestCase;
