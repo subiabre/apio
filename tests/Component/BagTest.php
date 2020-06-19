@@ -4,6 +4,7 @@ namespace Apio\Tests\Component;
 
 use Apio\Component\Bag;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Serializer\Serializer;
 
 class BagTest extends TestCase
 {
@@ -30,5 +31,13 @@ class BagTest extends TestCase
         $bag = new MockBag;
 
         $this->assertInstanceOf(Bag::class, $bag->bag);
+    }
+
+    public function testDefaultBagSerializer()
+    {
+        $bag = new Bag;
+
+        $this->assertObjectHasAttribute('serializer', $bag);
+        $this->assertInstanceOf(Serializer::class ,$bag->serializer);
     }
 }
