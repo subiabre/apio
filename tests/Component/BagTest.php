@@ -16,10 +16,6 @@ class BagTest extends TestCase
         $bag->array = ['one', 'two'];
         $bag->object = new Bag;
 
-        $this->assertObjectHasAttribute('string', $bag);
-        $this->assertObjectHasAttribute('array', $bag);
-        $this->assertObjectHasAttribute('object', $bag);
-
         $this->assertIsArray($bag->array);
         $this->assertSame('string', $bag->string);
         $this->assertSame(2, \count($bag->array));
