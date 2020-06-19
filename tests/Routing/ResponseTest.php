@@ -7,6 +7,17 @@ use PHPUnit\Framework\TestCase;
 
 class ResponseTest extends TestCase
 {
+    public function testDataAndErrorReturnSelf()
+    {
+        $response = new Response();
+
+        $error = $response->error(['message' => 'error']);
+        $data = $response->data(['body' => 'data']);
+
+        $this->assertInstanceOf(Response::class, $error);
+        $this->assertInstanceOf(Response::class, $data);
+    }
+
     public function testResponseErrorComposesArray()
     {
         $response = new Response();
