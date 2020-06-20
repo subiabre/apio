@@ -24,6 +24,8 @@ class Test extends Command
         $args = $input->getArguments();
         unset($args['command']);
 
+        $output->writeln("> phpunit");
+
         return (new TextUICommand)->run($args);
     }
 }
