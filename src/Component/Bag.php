@@ -66,14 +66,12 @@ class Bag implements BagInterface
     }
 
     /**
-     * Serialize current bag data in json
+     * Obtain current bag data array
      * @param array $ignore Properties to be ignored
      * @return string 
      */
-    public function jsonSerialize(array $ignore = []): string
+    public function toArray(array $ignore = []): array
     {
-        $bag = $this->ignoreKeys(['ignore']);
-
-        return $this->getDefaultSerializer()->serialize($bag, 'json');
+        return $this->ignoreKeys($ignore);
     }
 }
