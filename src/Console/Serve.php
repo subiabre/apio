@@ -24,12 +24,11 @@ class Serve extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $address = $input->getArgument('address') ?: 'localhost:8000';
-        $location = $input->getArgument('location');
-        $location = ($location) ? `-t $location` : '';
-
+        $location = $input->getArgument('location') ? '-t ' . $input->getArgument('location') : '';
         $command = "php -S $address $location";
 
-        $output->writeln($command);
+        $output->writeln("> $command");
+        
         system($command);
 
         return Command::SUCCESS;
