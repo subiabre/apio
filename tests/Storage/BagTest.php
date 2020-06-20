@@ -48,5 +48,6 @@ class BagTest extends TestCase
         $expected = ['name' => 'John', 'age' => '33'];
 
         $this->assertSame($expected, $bag->toArray(['ignore']));
+        $this->assertIsString($bag->ignore);
     }
 }
