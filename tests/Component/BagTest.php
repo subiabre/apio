@@ -43,9 +43,10 @@ class BagTest extends TestCase
 
         $bag->name = 'John';
         $bag->age = '33';
+        $bag->ignore = 'Ignore this';
 
         $expectedJson = \json_encode(['name' => 'John', 'age' => '33']);
-        $actualJson = $bag->jsonSerialize();
+        $actualJson = $bag->jsonSerialize(['ignore']);
 
         $this->assertJsonStringEqualsJsonString($expectedJson, $actualJson);
     }
