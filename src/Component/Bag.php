@@ -40,7 +40,7 @@ class Bag implements BagInterface
      * @param array $ignore Keys to be ignored
      * @return array
      */
-    public function ignoreKeys(array $ignore): array
+    protected function ignoreKeys(array $ignore): array
     {
         foreach($ignore as $key => $name)
         {
