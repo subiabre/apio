@@ -1,6 +1,6 @@
 <?php
 
-namespace Apio\Component;
+namespace Apio\Storage;
 
 interface BagInterface
 {

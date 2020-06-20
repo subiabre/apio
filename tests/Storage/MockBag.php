@@ -1,8 +1,8 @@
 <?php
 
-namespace Apio\Tests\Component;
+namespace Apio\Tests\Storage;
 
-use Apio\Component\Bag;
+use Apio\Storage\Bag;
 
 class MockBag extends Bag
 {

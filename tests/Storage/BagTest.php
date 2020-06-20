@@ -1,8 +1,8 @@
 <?php
 
-namespace Apio\Tests\Component;
+namespace Apio\Tests\Storage;
 
-use Apio\Component\Bag;
+use Apio\Storage\Bag;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Serializer\Serializer;
 
