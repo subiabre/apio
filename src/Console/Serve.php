@@ -17,15 +17,18 @@ class Serve extends Command
         $this->setName('serve');
         $this->setDescription('Launch the php built-in web server');
         $this->setHelp('Warning: This web server was designed to aid application development. It may also be useful for testing purposes or for application demonstrations that are run in controlled environments. It is not intended to be a full-featured web server. It should not be used on a public network.');
-        $this->addArgument('address', InputArgument::OPTIONAL, 'Listening address of the server');
+        
+        $this->addArgument('port', InputArgument::OPTIONAL, 'Listening port of the server');
         $this->addArgument('location', InputArgument::OPTIONAL, 'File or folder to match the server root folder');
+        $this->addArgument('address', InputArgument::OPTIONAL, 'Listening address of the server');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $address = $input->getArgument('address') ?: 'localhost:8000';
+        $port = $input->getArgument('port') ?: '8000';
         $location = $input->getArgument('location') ? '-t ' . $input->getArgument('location') : '';
-        $command = "php -S $address $location";
+        $address = $input->getArgument('address') ?: 'localhost';
+        $command = "php -S $address:$port $location";
 
         $output->writeln("> $command");
         
