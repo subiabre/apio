@@ -37,7 +37,7 @@ class BagTest extends TestCase
         $this->assertInstanceOf(Serializer::class ,$bag->serializer);
     }
 
-    public function testSerialization()
+    public function testArraySerialization()
     {
         $bag = new Bag;
 
@@ -45,9 +45,8 @@ class BagTest extends TestCase
         $bag->age = '33';
         $bag->ignore = 'Ignore this';
 
-        $expectedJson = \json_encode(['name' => 'John', 'age' => '33']);
-        $actualJson = $bag->jsonSerialize(['ignore']);
+        $expected = ['name' => 'John', 'age' => '33'];
 
-        $this->assertJsonStringEqualsJsonString($expectedJson, $actualJson);
+        $this->assertSame($expected, $bag->toArray(['ignore']));
     }
 }
