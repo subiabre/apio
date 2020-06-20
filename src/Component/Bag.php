@@ -14,7 +14,7 @@ class Bag implements BagInterface
 {
     public $serializer;
 
-    protected $bag;
+    protected $bag = [];
 
     /**
      * @param Serializer $serializer You can inject your own Serializer based on the Symfony one
