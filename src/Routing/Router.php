@@ -90,14 +90,14 @@ class Router
     }
 
     /**
-     * Import routes from a controller class
-     * @param Controller $controller Controller class with the routes defined inside `routes()`
+     * Import routes from a routes loader class
+     * @param RoutesLoader $routes Routes loader class with the routes defined inside `routes()`
      */
-    public function use(Controller $controller)
+    public function use(RoutesLoader $routes)
     {
-        $controller->routes();
+        $routes->routes();
 
-        $this->routeList = \array_merge($this->routeList, $controller->router->routeList);
+        $this->routeList = \array_merge($this->routeList, $routes->router->routeList);
     }
 
     /**

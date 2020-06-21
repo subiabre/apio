@@ -2,7 +2,7 @@
 
 namespace Apio\Routing;
 
-interface ControllerInterface
+interface RoutesLoaderInterface
 {
     public function getRouter(): Router;
     public function routes(): void;

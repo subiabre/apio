@@ -2,7 +2,7 @@
 
 namespace Apio\Routing;
 
-class Controller implements ControllerInterface
+abstract class RoutesLoader implements RoutesLoaderInterface
 {
     public $router;
 
@@ -23,6 +23,5 @@ class Controller implements ControllerInterface
     /**
      * Add new routes using the internal router instance
      */
-    public function routes(): void
-    {}
+    abstract public function routes(): void;
 }
