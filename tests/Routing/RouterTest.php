@@ -7,6 +7,7 @@ use FastRoute\Dispatcher;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class RouterTest extends TestCase
 {
@@ -59,5 +60,17 @@ class RouterTest extends TestCase
         $this->assertSame('GET', $router->routeList[0]['method']);
         $this->assertSame('/test', $router->routeList[0]['path']);
         $this->assertSame('OK', $router->routeList[0]['handler']());
+    }
+
+    public function testUseController()
+    {
+        $router = new Router();
+
+        $router->use(new ControllerMock());
+
+        $this->assertSame(1, \count($router->routeList));
+        $this->assertSame('GET', $router->routeList[0]['method']);
+        $this->assertSame('/test', $router->routeList[0]['path']);
+        $this->assertInstanceOf(SerializerInterface::class, $router->routeList[0]['handler']());
     }
 }
