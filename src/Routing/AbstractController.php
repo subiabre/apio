@@ -7,7 +7,7 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\SerializerInterface;
 
-abstract class Controller extends RoutesLoader
+abstract class AbstractController extends AbstractRoutesLoader
 {
     /**
      * @var Serializer
