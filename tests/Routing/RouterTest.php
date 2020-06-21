@@ -2,7 +2,6 @@
 
 namespace Apio\Tests\Routing;
 
-use Apio\Routing\Controller;
 use Apio\Routing\Router;
 use FastRoute\Dispatcher;
 use PHPUnit\Framework\TestCase;
@@ -54,7 +53,7 @@ class RouterTest extends TestCase
     {
         $router = new Router();
 
-        $router->use(new MockController);
+        $router->use(new MockRoutesLoader);
 
         $this->assertSame(1, \count($router->routeList));
         $this->assertSame('GET', $router->routeList[0]['method']);

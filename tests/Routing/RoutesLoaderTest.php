@@ -2,16 +2,15 @@
 
 namespace Apio\Tests\Routing;
 
-use Apio\Routing\Controller;
 use Apio\Routing\Router;
 use PHPUnit\Framework\TestCase;
 
-class ControllerTest extends TestCase
+class RoutesLoaderTest extends TestCase
 {
     public function testInstanceHasEmptyRouter()
     {
-        $controller = new MockController;
-        $router = $controller->getRouter();
+        $routes = new MockRoutesLoader;
+        $router = $routes->getRouter();
 
         $this->assertInstanceOf(Router::class, $router);
         $this->assertTrue(empty($router->routeList));
@@ -19,7 +18,7 @@ class ControllerTest extends TestCase
 
     public function testRoutesMakesList()
     {
-        $controller = new MockController;
+        $controller = new MockRoutesLoader;
         $controller->routes();
 
         $this->assertNotTrue(empty($controller->router->routeList));
