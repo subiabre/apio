@@ -93,11 +93,11 @@ class Router
      * Import routes from a routes loader class
      * @param RoutesLoader $routes Routes loader class with the routes defined inside `routes()`
      */
-    public function use(RoutesLoader $routes)
+    public function use(RoutesLoaderInterface $routes)
     {
         $routes->routes();
 
-        $this->routeList = \array_merge($this->routeList, $routes->router->routeList);
+        $this->routeList = \array_merge($this->routeList, $routes->routeList);
     }
 
     /**

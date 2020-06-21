@@ -2,24 +2,8 @@
 
 namespace Apio\Routing;
 
-abstract class RoutesLoader implements RoutesLoaderInterface
+abstract class RoutesLoader extends Router implements RoutesLoaderInterface
 {
-    public $router;
-
-    public function __construct()
-    {
-        $this->router = $this->getRouter();  
-    }
-
-    /**
-     * Return a new router instance
-     * @return Router
-     */
-    public function getRouter(): \Apio\Routing\Router
-    {
-        return new Router();
-    }
-
     /**
      * Add new routes using the internal router instance
      */
