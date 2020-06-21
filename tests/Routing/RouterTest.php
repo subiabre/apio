@@ -49,7 +49,7 @@ class RouterTest extends TestCase
         $this->assertSame('OK', $router->routeList[0]['handler']());
     }
 
-    public function testUseController()
+    public function testUseRoutesLoader()
     {
         $router = new Router();
 
