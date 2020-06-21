@@ -8,6 +8,6 @@ class MockRoutesLoader extends RoutesLoader
 {
     public function routes(): void
     {
-        $this->router->get('/test', fn() => 'OK');
+        $this->get('/test', fn() => 'OK');
     }
 }
