@@ -5,7 +5,7 @@ namespace Apio\Routing;
 abstract class RoutesLoader extends RouterCore implements RoutesLoaderInterface
 {
     /**
-     * Add new routes using the internal router instance
+     * Add new routes inside this function
      */
     abstract public function routes(): void;
 }
