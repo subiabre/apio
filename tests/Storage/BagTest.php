@@ -29,14 +29,6 @@ class BagTest extends TestCase
         $this->assertInstanceOf(Bag::class, $bag->bag);
     }
 
-    public function testDefaultBagSerializer()
-    {
-        $bag = new Bag;
-
-        $this->assertObjectHasAttribute('serializer', $bag);
-        $this->assertInstanceOf(Serializer::class ,$bag->serializer);
-    }
-
     public function testArraySerialization()
     {
         $bag = new Bag;
