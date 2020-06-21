@@ -24,7 +24,7 @@ class BagTest extends TestCase
 
     public function testBagChild()
     {
-        $bag = new MockBag;
+        $bag = new BagMock;
 
         $this->assertInstanceOf(Bag::class, $bag->bag);
     }

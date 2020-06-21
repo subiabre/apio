@@ -4,7 +4,7 @@ namespace Apio\Tests\Storage;
 
 use Apio\Storage\Bag;
 
-class MockBag extends Bag
+class BagMock extends Bag
 {
     public $bag;
 
