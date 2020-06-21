@@ -53,7 +53,7 @@ class RouterTest extends TestCase
     {
         $router = new Router();
 
-        $router->use(new MockRoutesLoader);
+        $router->use(new RoutesLoaderMock);
 
         $this->assertSame(1, \count($router->routeList));
         $this->assertSame('GET', $router->routeList[0]['method']);
