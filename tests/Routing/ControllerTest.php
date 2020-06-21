@@ -10,7 +10,7 @@ class ControllerTest extends TestCase
 {
     public function testInstanceHasEmptyRouter()
     {
-        $controller = new Controller;
+        $controller = new MockController;
         $router = $controller->getRouter();
 
         $this->assertInstanceOf(Router::class, $router);
