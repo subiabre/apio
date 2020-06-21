@@ -2,9 +2,9 @@
 
 namespace Apio\Tests\Routing;
 
-use Apio\Routing\RoutesLoader;
+use Apio\Routing\AbstractRoutesLoader;
 
-class RoutesLoaderMock extends RoutesLoader
+class RoutesLoaderMock extends AbstractRoutesLoader
 {
     public function routes(): void
     {
