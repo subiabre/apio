@@ -43,11 +43,21 @@ class RouterTest extends TestCase
         $router = new Router();
         
         $router->addRoute('GET', '/', fn() => 'OK');
+        $router->get('/get', fn() => 'OK');
+        $router->post('/post', fn() => 'OK');
+        $router->put('/put', fn() => 'OK');
+        $router->delete('/delete', fn() => 'OK');
 
         $this->assertIsArray($router->routeList);
         $this->assertSame('GET', $router->routeList[0]['method']);
         $this->assertSame('/', $router->routeList[0]['path']);
         $this->assertSame('OK', $router->routeList[0]['handler']());
+
+        foreach ($router->routeList as $key => $route) {
+            $this->assertSame($route['method'], $router->routeList[$key]['method']);
+            $this->assertSame($route['path'], $router->routeList[$key]['path']);
+            $this->assertSame($route['handler'](), $router->routeList[$key]['handler']());
+        }
     }
 
     public function testUseRoutesLoader()
