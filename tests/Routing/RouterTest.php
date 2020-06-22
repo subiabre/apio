@@ -117,4 +117,37 @@ class RouterTest extends TestCase
 
         $this->assertEquals($response, $dispatched);
     }
+
+    public function testListenDispatchesNotFound()
+    {
+        $request = Request::create(
+            '/testNonExistingEndpoint',
+            'POST'
+        );
+
+        $response = new RoutingResponse();
+        $response->error($response::NOT_FOUND_MESSAGE);
+
+        $router = new Router($request);
+        $router->use(new RoutesLoaderMock);
+
+        $dispatched = $router->listen();
+
+        $this->assertEquals($response, $dispatched);
+    }
+
+    public function testListenDispatchesNotFoundByDefault()
+    {
+        $request = Request::createFromGlobals();
+
+        $response = new RoutingResponse();
+        $response->error($response::NOT_FOUND_MESSAGE);
+
+        $router = new Router($request);
+        $router->use(new RoutesLoaderMock);
+
+        $dispatched = $router->listen();
+
+        $this->assertEquals($response, $dispatched);
+    }
 }
