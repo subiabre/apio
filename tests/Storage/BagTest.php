@@ -4,7 +4,6 @@ namespace Apio\Tests\Storage;
 
 use Apio\Storage\Bag;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Serializer\Serializer;
 
 class BagTest extends TestCase
 {
@@ -15,11 +14,14 @@ class BagTest extends TestCase
         $bag->string = 'string';
         $bag->array = ['one', 'two'];
         $bag->object = new Bag;
+        $bag->fn = fn() => true;
 
         $this->assertIsArray($bag->array);
         $this->assertSame('string', $bag->string);
         $this->assertSame(2, \count($bag->array));
         $this->assertInstanceOf(Bag::class, $bag->object);
+        $this->assertIsCallable($bag->fn);
+        $this->assertTrue($bag->fn());
     }
 
     public function testBagChild()
