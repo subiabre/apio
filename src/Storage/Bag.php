@@ -24,6 +24,17 @@ class Bag implements BagInterface
         return \array_diff_key($this->bag, $ignore);
     }
 
+    /**
+     * Import data from an existing object into the bag
+     * @param object $object
+     */
+    public function fromObject(object $object)
+    {
+        $arrayObject = (array) $object;
+
+        $this->bag = \array_merge($this->bag, $arrayObject);
+    }
+
     public function __set($name, $value)
     {
         $this->bag[$name] = $value;

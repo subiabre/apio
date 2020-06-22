@@ -4,6 +4,7 @@ namespace Apio\Tests\Storage;
 
 use Apio\Storage\Bag;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\HttpFoundation\Request;
 
 class BagTest extends TestCase
 {
@@ -37,6 +38,18 @@ class BagTest extends TestCase
         $bag = new BagMock;
 
         $this->assertInstanceOf(Bag::class, $bag->bag);
+    }
+
+    public function testFromObjectSerialization()
+    {
+        $bag = new Bag;
+
+        $request = Request::create('/uri', 'GET', ['body' => 'data']);
+
+        $bag->fromObject($request);
+
+        $this->assertNotNull($bag->request);
+        $this->assertNotNull($bag->query);
     }
 
     public function testArraySerialization()
