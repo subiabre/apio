@@ -9,4 +9,6 @@ interface BagInterface
     public function __get($name);
 
     public function __call($name, $arguments);
+
+    public function toArray(array $ignore = []): array;
 }
