@@ -150,4 +150,40 @@ class RouterTest extends TestCase
 
         $this->assertEquals($response, $dispatched);
     }
+
+    public function testListenDispatchesInjectedNotFoundResponse()
+    {
+        $request = Request::create(
+            '/testNonExistingEndpoint',
+            'POST'
+        );
+
+        $response = new RoutingResponse();
+        $response->error(['Not found test']);
+
+        $router = new Router($request);
+        $router->use(new RoutesLoaderMock);
+
+        $dispatched = $router->listen($response);
+
+        $this->assertEquals($response, $dispatched);
+    }
+
+    public function testListenDispatchesInjectedNotAllowedResponse()
+    {
+        $request = Request::create(
+            '/test',
+            'POST'
+        );
+
+        $response = new RoutingResponse();
+        $response->error(['Not allowed test']);
+
+        $router = new Router($request);
+        $router->use(new RoutesLoaderMock);
+
+        $dispatched = $router->listen(new Response, $response);
+
+        $this->assertEquals($response, $dispatched);
+    }
 }
