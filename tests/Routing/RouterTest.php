@@ -2,6 +2,7 @@
 
 namespace Apio\Tests\Routing;
 
+use Apio\Routing\Response as RoutingResponse;
 use Apio\Routing\Router;
 use FastRoute\Dispatcher;
 use PHPUnit\Framework\TestCase;
@@ -79,5 +80,22 @@ class RouterTest extends TestCase
         $this->assertSame('GET', $router->routeList[0]['method']);
         $this->assertSame('/test', $router->routeList[0]['path']);
         $this->assertInstanceOf(SerializerInterface::class, $router->routeList[0]['handler']());
+    }
+
+    public function testListenDispatchesMatchingRequests()
+    {
+        $request = Request::create(
+            '/test',
+            'GET'
+        );
+
+        $response = new RoutingResponse();
+
+        $router = new Router($request);
+        $router->use(new RoutesLoaderMock);
+
+        $dispatched = $router->listen();
+
+        $this->assertEquals($response, $dispatched);
     }
 }
