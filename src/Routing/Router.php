@@ -50,8 +50,9 @@ class Router extends RouterCore
     
     /**
      * Builds routes dispatcher and handles the route matches
+     * @return Response Response object
      */
-    public function listen()
+    public function listen(): HttpResponse
     {
         $dispatcher = $this->buildDispatcher();
 
@@ -61,29 +62,24 @@ class Router extends RouterCore
         );
 
         switch ($match[0]) {
-            case Dispatcher::NOT_FOUND:
-                
+            default:
                 $this->response->error($this->response::NOT_FOUND_MESSAGE);
-                $this->response->send();
 
-                break;
+                return $this->response;
             case Dispatcher::METHOD_NOT_ALLOWED:
                 $allowedMethods = $match[1];
 
                 $this->response->error($this->response::METHOD_NOT_ALLOWED_MESSAGE);
                 $this->response->error(['methods' => $allowedMethods]);
-                $this->response->send();
 
-                break;
+                return $this->response;
             case Dispatcher::FOUND:
                 $handler = $match[1];
                 $vars = $match[2];
 
                 $this->request->query->add($vars);
 
-                $handler($this->request, $this->response);
-                
-                break;
+                return $handler($this->request, $this->response);
         }
     }
 
