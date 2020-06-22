@@ -1,1 +1,9 @@
+# Dependencies
 /vendor/
+
+# Temporal files and cache
+*.cache
+*.tmp
+
+# Code coverage clover
+coverage-clover.xml
