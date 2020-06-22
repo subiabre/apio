@@ -42,22 +42,19 @@ class RouterTest extends TestCase
     {
         $router = new Router();
         
-        $router->addRoute('GET', '/', fn() => 'OK');
-        $router->get('/get', fn() => 'OK');
-        $router->post('/post', fn() => 'OK');
-        $router->put('/put', fn() => 'OK');
-        $router->delete('/delete', fn() => 'OK');
+        $router->addRoute('CONNECT', '/', fn(): Response => new Response());
+        $router->get('/', fn(): Response => new Response());
+        $router->post('/', fn(): Response => new Response());
+        $router->put('/', fn(): Response => new Response());
+        $router->delete('/', fn(): Response => new Response());
 
         $this->assertIsArray($router->routeList);
-        $this->assertSame('GET', $router->routeList[0]['method']);
-        $this->assertSame('/', $router->routeList[0]['path']);
-        $this->assertSame('OK', $router->routeList[0]['handler']());
 
-        foreach ($router->routeList as $key => $route) {
-            $this->assertSame($route['method'], $router->routeList[$key]['method']);
-            $this->assertSame($route['path'], $router->routeList[$key]['path']);
-            $this->assertSame($route['handler'](), $router->routeList[$key]['handler']());
-        }
+        $this->assertSame('CONNECT', $router->routeList[0]['method']);
+        $this->assertSame('GET', $router->routeList[1]['method']);
+        $this->assertSame('POST', $router->routeList[2]['method']);
+        $this->assertSame('PUT', $router->routeList[3]['method']);
+        $this->assertSame('DELETE', $router->routeList[4]['method']);
     }
 
     public function testUseRoutesLoader()
@@ -69,7 +66,7 @@ class RouterTest extends TestCase
         $this->assertSame(1, \count($router->routeList));
         $this->assertSame('GET', $router->routeList[0]['method']);
         $this->assertSame('/test', $router->routeList[0]['path']);
-        $this->assertSame('OK', $router->routeList[0]['handler']());
+        $this->assertInstanceOf(Response::class, $router->routeList[0]['handler']());
     }
 
     public function testUseController()
