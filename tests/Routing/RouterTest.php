@@ -3,6 +3,7 @@
 namespace Apio\Tests\Routing;
 
 use Apio\Routing\AbstractRouteList;
+use Apio\Routing\Response;
 use Apio\Routing\Router;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,5 +38,46 @@ class RouterTest extends TestCase
 
         $this->assertInstanceOf(AbstractRouteList::class, $routerRouteList);
         $this->assertSame($routeList, $routerRouteList);
+    }
+
+    public function testListenDispatchesMethodNotAllowed()
+    {
+        $request = Request::create(
+            '/',
+            'POST'
+        );
+
+        $response = (new Response)
+            ->error(['message' => 'Method not allowed'])
+            ->error(['methods' => 'GET']);
+
+        $router = new Router();
+        $routeList = new RouteListMock;
+
+        $router->use($routeList);
+
+        $dispatched = $router->listen();
+
+        $this->assertEquals($response, $dispatched);
+    }
+
+    public function testListenDispatchesRouteNotFound()
+    {
+        $request = Request::create(
+            '/route not found',
+            'GET'
+        );
+
+        $response = (new Response)
+            ->error(['message' => 'Route not found']);
+
+        $router = new Router();
+        $routeList = new RouteListMock;
+
+        $router->use($routeList);
+
+        $dispatched = $router->listen();
+
+        $this->assertEquals($response, $dispatched);
     }
 }
