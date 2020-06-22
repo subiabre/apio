@@ -4,6 +4,9 @@ namespace Apio\Routing;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 
+/**
+ * Wraps the Symfony JsonResponse into a handy Response object
+ */
 class Response extends JsonResponse
 {
     protected $bodyError = [];
