@@ -24,6 +24,14 @@ class BagTest extends TestCase
         $this->assertTrue($bag->fn());
     }
 
+    public function testReturnsNullOnNonExistingKeys()
+    {
+        $bag = new Bag;
+
+        $this->assertNull($bag->iDontExist);
+        $this->assertNull($bag->iDontExist());
+    }
+
     public function testBagChild()
     {
         $bag = new BagMock;

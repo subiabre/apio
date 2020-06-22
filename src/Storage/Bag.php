@@ -31,12 +31,22 @@ class Bag implements BagInterface
 
     public function __get($name)
     {
-        return $this->bag[$name];
+        if (\array_key_exists($name, $this->bag)) {
+            return $this->bag[$name];
+        }
+
+        return NULL;
     }
 
     public function __call($name, $arguments)
     {
-        return $this->__get($name)($arguments);
+        if (\array_key_exists($name, $this->bag) 
+            && is_callable($this->bag[$name])) 
+        {
+            return $this->__get($name)($arguments);
+        }
+
+        return NULL;
     }
 
     /**
