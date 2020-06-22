@@ -48,9 +48,11 @@ class Router extends RouterCore
     
     /**
      * Builds routes dispatcher and handles the route matches
+     * @param Response $notFound Response object to be used when matching a NOT_FOUND request type
+     * @param Response $notAllowed Response object to be used when matching a METHOD_NOT_ALLOWED request type
      * @return Response Response object
      */
-    public function listen(): HttpResponse
+    public function listen(Response $notFound = NULL, Response $notAllowed = NULL): Response
     {
         $dispatcher = $this->buildDispatcher();
 
@@ -61,16 +63,16 @@ class Router extends RouterCore
 
         switch ($match[0]) {
             default:
-                $this->response->error($this->response::NOT_FOUND_MESSAGE);
+                $notFound = $notFound ?: (new Response)->error(Response::NOT_FOUND_MESSAGE);
 
-                return $this->response;
+                return $notFound;
             case Dispatcher::METHOD_NOT_ALLOWED:
                 $allowedMethods = $match[1];
 
-                $this->response->error($this->response::METHOD_NOT_ALLOWED_MESSAGE);
-                $this->response->error(['methods' => $allowedMethods]);
+                $notAllowed = $notAllowed ?: (new Response)->error(Response::METHOD_NOT_ALLOWED_MESSAGE);
+                $notAllowed->error(['methods' => $allowedMethods]);
 
-                return $this->response;
+                return $notAllowed;
             case Dispatcher::FOUND:
                 $handler = $match[1];
                 $vars = $match[2];

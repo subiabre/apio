@@ -182,7 +182,7 @@ class RouterTest extends TestCase
         $router = new Router($request);
         $router->use(new RoutesLoaderMock);
 
-        $dispatched = $router->listen(new Response, $response);
+        $dispatched = $router->listen(new RoutingResponse, $response);
 
         $this->assertEquals($response, $dispatched);
     }
