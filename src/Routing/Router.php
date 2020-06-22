@@ -87,7 +87,7 @@ class Router extends RouterCore
      * Import routes from a routes loader class
      * @param RoutesLoader $routes Routes loader class with the routes defined inside `routes()`
      */
-    public function use(RoutesLoaderInterface $routes)
+    public function use(AbstractRoutesLoader $routes)
     {
         $routes->routes();
 
