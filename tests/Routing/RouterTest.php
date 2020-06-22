@@ -98,4 +98,23 @@ class RouterTest extends TestCase
 
         $this->assertEquals($response, $dispatched);
     }
+
+    public function testListenDispatchesMethodNotAllowed()
+    {
+        $request = Request::create(
+            '/test',
+            'POST'
+        );
+
+        $response = new RoutingResponse();
+        $response->error($response::METHOD_NOT_ALLOWED_MESSAGE);
+        $response->error(['methods' => ['GET']]);
+
+        $router = new Router($request);
+        $router->use(new RoutesLoaderMock);
+
+        $dispatched = $router->listen();
+
+        $this->assertEquals($response, $dispatched);
+    }
 }
