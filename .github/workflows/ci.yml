@@ -8,8 +8,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
-    - name: Install composer dependencies
-      uses: php-actions/composer@v1
-    - name: Run PHPUnit tests
-      run: composer run-script test
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '7.4'
+        extensions: mbstring, intl
+        ini-values: post_max_size=256M, short_open_tag=On
+        coverage: xdebug    
+        tools: php-cs-fixer, phpunit
+
+    - name: Composer install
+      run: composer install
+
+    - name: PHPUnit tests
+      run: composer run-script coverage
+
+    - name: Send coverage
+      run: bash <(curl -s https://codecov.io/bash)
