@@ -21,10 +21,8 @@ class Router extends RouterCore
      */
     public function __construct(HttpRequest $request = NULL, HttpResponse $response = NULL)
     {
-        $this->request = $request ? $request : new HttpRequest();
+        $this->request = $request ? $request : HttpRequest::createFromGlobals();
         $this->response = $response ? $response : new Response();
-
-        $this->request = $this->request::createFromGlobals();
     }
 
     /**
