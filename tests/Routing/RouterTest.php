@@ -5,6 +5,7 @@ namespace Apio\Tests\Routing;
 use Apio\Routing\AbstractRouteList;
 use Apio\Routing\Response;
 use Apio\Routing\Router;
+use FastRoute\Dispatcher;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -38,6 +39,18 @@ class RouterTest extends TestCase
 
         $this->assertInstanceOf(AbstractRouteList::class, $routerRouteList);
         $this->assertSame($routeList, $routerRouteList);
+    }
+
+    public function testBuildsDispatcher()
+    {
+        $router = new Router();
+        $routeList = new RouteListMock;
+
+        $router->use($routeList);
+
+        $dispatcher = $router->buildDispatcher();
+
+        $this->assertInstanceOf(Dispatcher::class, $dispatcher);
     }
 
     public function testListenDispatchesMethodNotAllowed()

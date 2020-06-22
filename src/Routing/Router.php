@@ -2,7 +2,11 @@
 
 namespace Apio\Routing;
 
+use FastRoute\Dispatcher;
+use FastRoute\RouteCollector;
 use Symfony\Component\HttpFoundation\Request;
+
+use function FastRoute\simpleDispatcher;
 
 /**
  * Takes a Request object and dispatches it
@@ -47,5 +51,26 @@ class Router
     public function getRouteList(): AbstractRouteList
     {
         return $this->routeList;
+    }
+
+    /**
+     * Generate the routes dispatcher from the routes \
+     * Auto-called on `listen()`
+     * @return Dispatcher
+     */
+    public function buildDispatcher() : Dispatcher
+    {
+        $dispatcher = simpleDispatcher(function(RouteCollector $collector) {
+            foreach ($this->routeList as $route)
+            {
+                $collector->addRoute(
+                    $route['method'],
+                    $route['path'],
+                    $route['handler']
+                );
+            }
+        });
+
+        return $dispatcher;
     }
 }
