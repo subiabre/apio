@@ -37,6 +37,7 @@
     },
     "bin": ["apio"],
     "scripts": {
-        "test": "phpunit"
+        "test": "phpunit",
+        "coverage": "phpunit --coverage-clover coverage-clover.xml --whitelist src"
     }
 }
