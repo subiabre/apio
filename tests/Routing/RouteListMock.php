@@ -32,7 +32,7 @@ class RouteListMock extends AbstractRouteList
     {
         $this->addRoute('GET', '/', function(Request $request) {
             $response = new Response();
-            $response->data(['request' => $request]);
+            $response->request = $request;
 
             return $response;
         });
