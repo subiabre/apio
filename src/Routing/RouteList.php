@@ -8,6 +8,9 @@ namespace Apio\Routing;
  */
 class RouteList extends AbstractRouteList
 {
+    /**
+     * @codeCoverageIgnore
+     */
     public function methodNotAllowed(\Symfony\Component\HttpFoundation\Request $request, array $methods): \Apio\Routing\Response
     {
         $response = new Response();
@@ -20,6 +23,9 @@ class RouteList extends AbstractRouteList
         return $response;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function routeNotFound(\Symfony\Component\HttpFoundation\Request $request): \Apio\Routing\Response
     {
         $response = new Response();
