@@ -84,6 +84,7 @@ class Router extends RouteList
     /**
      * Dispatch routes
      * @return Response
+     * @throws BadRouteException
      */
     public function listen(): Response
     {
@@ -97,18 +98,16 @@ class Router extends RouteList
         switch ($match[0]) {
             default:
                 
-                $response = $this->routes
-                    ->routeNotFound($this->request);
-
-                return $response;
+                $response = $this->routes ? $this->routes : $this;
+                
+                return $response->routeNotFound($this->request);
                 
             case Dispatcher::METHOD_NOT_ALLOWED:
                 $allowedMethods = $match[1];
                 
-                $response = $this->routes
-                    ->methodNotAllowed($this->request, $allowedMethods);
-
-                return $response;
+                $response = $this->routes ? $this->routes : $this;
+                
+                return $response->methodNotAllowed($this->request, $allowedMethods);
 
             case Dispatcher::FOUND:
                 $handler = $match[1];
