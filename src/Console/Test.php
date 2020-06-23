@@ -16,7 +16,7 @@ class Test extends Command
     {
         $this->setName('test');
         $this->setDescription('Run the PHPUnit test suite');
-        $this->setHelp('This command is a shorthand for `./vendor/bin/phpunit`');
+        $this->setHelp('This command is a shorthand for `./vendor/bin/phpunit`. Without arguments support.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
