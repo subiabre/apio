@@ -37,6 +37,12 @@ class RouteListMock extends AbstractRouteList
             return $response;
         });
 
+        $this->addRoute('GET', '/fail', function(Response $response) {
+            $response = new Response();
+
+            return $response;
+        });
+
         $this->get('/test', fn() => new Response);
         $this->post('/test', fn() => new Response);
         $this->put('/test', fn() => new Response);
