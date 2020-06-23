@@ -4,6 +4,7 @@ namespace Apio\Tests\Routing;
 
 use Apio\Routing\AbstractRouteList;
 use Apio\Routing\Response;
+use Apio\Routing\RouteList;
 use Apio\Routing\Router;
 use FastRoute\Dispatcher;
 use PHPUnit\Framework\TestCase;
@@ -39,6 +40,26 @@ class RouterTest extends TestCase
 
         $this->assertInstanceOf(AbstractRouteList::class, $routerRouteList);
         $this->assertSame($routeList, $routerRouteList);
+    }
+
+    public function testTakesManyRouteLists()
+    {
+        $router = new Router();
+        $routeList1 = new RouteListMock;
+        $routeList2 = new RouteListMock;
+
+        $router
+            ->use($routeList1)
+            ->use($routeList2);
+
+        $routerRouteList = $router->getRouteList();
+
+        $this->assertInstanceOf(AbstractRouteList::class, $routerRouteList);
+        $this->assertNotSame($routeList1, $routerRouteList);
+        $this->assertNotSame($routeList2, $routerRouteList);
+
+        $this->assertNotSame($routeList1->routeList, $routerRouteList->routeList);
+        $this->assertNotSame($routeList2->routeList, $routerRouteList->routeList);
     }
 
     public function testBuildsDispatcher()
