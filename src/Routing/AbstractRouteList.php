@@ -11,6 +11,12 @@ use Symfony\Component\HttpFoundation\Request;
 abstract class AbstractRouteList
 {
     /**
+     * Array containing the routes in a FastRoute compatible format
+     * @var array
+     */
+    public $routeList = [];
+    
+    /**
      * Method to be called when the Request matches a route path with an invalid method
      * @param Request $request Request object passed by the Router
      * @param array $methods List of allowed methods passed by the Router
@@ -29,12 +35,6 @@ abstract class AbstractRouteList
      * @param Request $request Request object passed by the Router
      */
     abstract public function routes(Request $request): void;
-
-    /**
-     * Array containing the routes in a FastRoute compatible format
-     * @var array
-     */
-    public $routeList = [];
 
     /**
      * Add a route matching any HTTP method
