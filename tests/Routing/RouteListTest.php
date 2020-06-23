@@ -3,9 +3,9 @@
 namespace Apio\Tests\Routing;
 
 use Apio\Routing\Response;
-use Apio\Routing\RouteList;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
+use TypeError;
 
 class RouteListTest extends TestCase
 {
@@ -48,6 +48,8 @@ class RouteListTest extends TestCase
     {
         $routeList = new RouteListMock;
         $routeList->routes();
+
+        $this->expectException(TypeError::class);
 
         foreach ($routeList->routeList as $route) {
             $response = $route['handler'](new Request);
