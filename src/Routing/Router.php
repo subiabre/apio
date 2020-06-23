@@ -23,7 +23,7 @@ class Router
     /**
      * @var AbstractRouteList
      */
-    protected $routeList;
+    protected $routes;
     
     /**
      * @param Request $request Request handler object
@@ -41,7 +41,7 @@ class Router
      */
     public function use(AbstractRouteList $routeList)
     {
-        $this->routeList = $routeList;
+        $this->routes = $routeList;
     }
 
     /**
@@ -50,7 +50,7 @@ class Router
      */
     public function getRouteList(): AbstractRouteList
     {
-        return $this->routeList;
+        return $this->routes;
     }
 
     /**
@@ -60,8 +60,8 @@ class Router
      */
     public function buildDispatcher() : Dispatcher
     {
-        $this->routeList->routes($this->request);
-        $list = $this->routeList->routeList;
+        $this->routes->routes($this->request);
+        $list = $this->routes->routeList;
 
         $dispatcher = simpleDispatcher(function(RouteCollector $collector) use ($list) {
             foreach ($list as $route)
@@ -93,7 +93,7 @@ class Router
         switch ($match[0]) {
             default:
                 
-                $response = $this->routeList
+                $response = $this->routes
                     ->routeNotFound($this->request);
 
                 return $response;
@@ -101,7 +101,7 @@ class Router
             case Dispatcher::METHOD_NOT_ALLOWED:
                 $allowedMethods = $match[1];
                 
-                $response = $this->routeList
+                $response = $this->routes
                     ->methodNotAllowed($this->request, $allowedMethods);
 
                 return $response;
