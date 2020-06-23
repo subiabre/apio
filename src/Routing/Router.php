@@ -12,7 +12,7 @@ use function FastRoute\simpleDispatcher;
  * Takes a Request object and dispatches it
  * @author Subiabre
  */
-class Router
+class Router extends RouteList
 {
     /**
      * The Request handler object instance
@@ -38,12 +38,17 @@ class Router
     /**
      * Use an instance of route list
      * @param AbstractRouteList $routeList Instance of route list
+     * @return self
      */
-    public function use(AbstractRouteList $routeList)
+    public function use(AbstractRouteList $routeList): self
     {
+        $this->routes = $routeList;
+
         $routeList->routes($this->request);
 
-        $this->routes = $routeList;
+        $this->routeList = \array_merge($this->routeList, $routeList->routeList);
+
+        return $this;
     }
 
     /**
@@ -63,7 +68,7 @@ class Router
     public function buildDispatcher() : Dispatcher
     {
         $dispatcher = simpleDispatcher(function(RouteCollector $collector) {
-            foreach ($this->routes->routeList as $route)
+            foreach ($this->routeList as $route)
             {
                 $collector->addRoute(
                     $route['method'],
