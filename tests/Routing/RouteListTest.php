@@ -59,18 +59,6 @@ class RouteListTest extends TestCase
         }        
     }
 
-    public function testHandlersGetPassedRequest()
-    {
-        $routeList = new RouteListMock;
-        $routeList->routes();
-
-        $request = Request::createFromGlobals();
-        $response = $routeList->routeList[0]['handler']($request);
-        $actual = $response->request;
-
-        $this->assertSame($request, $actual);
-    }
-
     public function testRouteListContainsNoDefaultRoutes()
     {
         $routeList = new RouteList;

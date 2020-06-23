@@ -131,4 +131,22 @@ class RouterTest extends TestCase
 
         $this->assertEquals($response, $dispatched);
     }
+
+    public function testHandlersGetPassedRequestAndResponse()
+    {
+        $request =  $request = Request::create(
+            '/',
+            'GET'
+        );
+
+        $router = new Router($request);
+        $routeList = new RouteListMock;
+
+        $router->use($routeList);
+
+        $dispatched = $router->listen();
+
+        $this->assertInstanceOf(Request::class, $dispatched->requestObj);
+        $this->assertInstanceOf(Response::class, $dispatched->responseObj);
+    }
 }
