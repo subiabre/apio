@@ -62,9 +62,9 @@ class RouterTest extends TestCase
 
         $response = (new Response)
             ->error(['message' => 'Method not allowed'])
-            ->error(['methods' => 'GET']);
+            ->error(['methods' => ['GET']]);
 
-        $router = new Router();
+        $router = new Router($request);
         $routeList = new RouteListMock;
 
         $router->use($routeList);
@@ -84,7 +84,7 @@ class RouterTest extends TestCase
         $response = (new Response)
             ->error(['message' => 'Route not found']);
 
-        $router = new Router();
+        $router = new Router($request);
         $routeList = new RouteListMock;
 
         $router->use($routeList);
