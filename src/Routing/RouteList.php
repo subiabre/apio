@@ -14,7 +14,8 @@ class RouteList extends AbstractRouteList
 
         $response
             ->error(['message' => 'Route request method not allowed.'])
-            ->error(['methods' => $methods]);
+            ->error(['methods' => $methods])
+            ->send();
 
         return $response;
     }
@@ -23,7 +24,9 @@ class RouteList extends AbstractRouteList
     {
         $response = new Response();
 
-        $response->error(['message' => 'Route not found.']);
+        $response
+            ->error(['message' => 'Route not found.'])
+            ->send();
 
         return $response;
     }
