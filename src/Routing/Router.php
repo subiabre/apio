@@ -41,6 +41,8 @@ class Router
      */
     public function use(AbstractRouteList $routeList)
     {
+        $routeList->routes($this->request);
+
         $this->routes = $routeList;
     }
 
@@ -60,11 +62,8 @@ class Router
      */
     public function buildDispatcher() : Dispatcher
     {
-        $this->routes->routes($this->request);
-        $list = $this->routes->routeList;
-
-        $dispatcher = simpleDispatcher(function(RouteCollector $collector) use ($list) {
-            foreach ($list as $route)
+        $dispatcher = simpleDispatcher(function(RouteCollector $collector) {
+            foreach ($this->routes->routeList as $route)
             {
                 $collector->addRoute(
                     $route['method'],
