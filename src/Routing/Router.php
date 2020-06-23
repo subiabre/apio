@@ -76,4 +76,40 @@ class Router
 
         return $dispatcher;
     }
+
+    /**
+     * Dispatch routes
+     * @return Response
+     */
+    public function listen(): Response
+    {
+        $dispatcher = $this->buildDispatcher();
+
+        $match = $dispatcher->dispatch(
+            $this->request->getMethod(),
+            $this->request->getRequestUri()
+        );
+
+        switch ($match[0]) {
+            default:
+                $response = $this->routeList->routeNotFound($this->request);
+
+                return $response;
+            case Dispatcher::METHOD_NOT_ALLOWED:
+                $allowedMethods = $match[1];
+
+                $response = $this->routeList->methodNotAllowed($this->request, $allowedMethods);
+
+                return $response;
+            case Dispatcher::FOUND:
+                $handler = $match[1];
+                $vars = $match[2];
+
+                $this->request->query->add($vars);
+
+                $response = $handler($this->request, $this->response);
+
+                return $response;
+        }
+    }
 }
