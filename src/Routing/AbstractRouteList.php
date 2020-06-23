@@ -32,9 +32,8 @@ abstract class AbstractRouteList
     /**
      * This method will be called by the Router before trying to load any routes \
      * Any route added before this method is run will also be read by the Router
-     * @param Request $request Request object passed by the Router
      */
-    abstract public function routes(Request $request): void;
+    abstract public function routes(): void;
 
     /**
      * Add a route matching any HTTP method

@@ -31,6 +31,6 @@ class RouteList extends AbstractRouteList
         return $response;
     }
 
-    public function routes(\Symfony\Component\HttpFoundation\Request $request): void
+    public function routes(): void
     {}
 }
