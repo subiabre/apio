@@ -11,7 +11,7 @@ class RouteListTest extends TestCase
     public function testBuildsRoutes()
     {
         $routeList = new RouteListMock;
-        $routeList->routes(new Request());
+        $routeList->routes();
 
         $this->assertIsArray($routeList->routeList);
 
@@ -32,7 +32,7 @@ class RouteListTest extends TestCase
         $routeList = new RouteListMock;
         
         $routeList->get('/new', fn() => new Response());
-        $routeList->routes(new Request());
+        $routeList->routes();
 
         $expected = [
             'method' => 'GET',

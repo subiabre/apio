@@ -4,6 +4,7 @@ namespace Apio\Tests\Routing;
 
 use Apio\Routing\AbstractRouteList;
 use Apio\Routing\Response;
+use Symfony\Component\HttpFoundation\Request;
 
 class RouteListMock extends AbstractRouteList
 {
@@ -27,9 +28,10 @@ class RouteListMock extends AbstractRouteList
         return $response;
     }
 
-    public function routes(\Symfony\Component\HttpFoundation\Request $request): void
+    public function routes(): void
     {
-        $this->addRoute('GET', '/', function(Response $response) use ($request) {
+        $this->addRoute('GET', '/', function(Request $request) {
+            $response = new Response();
             $response->data(['request' => $request]);
 
             return $response;
