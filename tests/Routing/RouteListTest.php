@@ -3,6 +3,7 @@
 namespace Apio\Tests\Routing;
 
 use Apio\Routing\Response;
+use Apio\Routing\RouteList;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use TypeError;
@@ -68,5 +69,13 @@ class RouteListTest extends TestCase
         $actual = $response->request;
 
         $this->assertSame($request, $actual);
+    }
+
+    public function testRouteListContainsNoDefaultRoutes()
+    {
+        $routeList = new RouteList;
+        $routeList->routes();
+
+        $this->assertEmpty($routeList->routeList);
     }
 }
