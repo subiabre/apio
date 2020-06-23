@@ -5,7 +5,7 @@ namespace Apio\Routing;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Asbtract for the RouteList classes
+ * Abstract for the RouteList classes
  */
 abstract class AbstractRouteList
 {
