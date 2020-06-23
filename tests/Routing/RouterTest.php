@@ -4,6 +4,7 @@ namespace Apio\Tests\Routing;
 
 use Apio\Routing\AbstractRouteList;
 use Apio\Routing\Response;
+use Apio\Routing\RouteList;
 use Apio\Routing\Router;
 use FastRoute\Dispatcher;
 use PHPUnit\Framework\TestCase;
@@ -78,11 +79,12 @@ class RouterTest extends TestCase
         );
 
         $response = (new Response)
-            ->error(['message' => 'Method not allowed'])
+            ->error(['message' => 'Route request method not allowed.'])
             ->error(['methods' => ['GET']]);
 
         $router = new Router($request);
-        $routeList = new RouteListMock;
+        $routeList = new RouteList;
+        $routeList->get('/', fn() => new Response);
 
         $router->use($routeList);
 
@@ -99,10 +101,10 @@ class RouterTest extends TestCase
         );
 
         $response = (new Response)
-            ->error(['message' => 'Route not found']);
+            ->error(['message' => 'Route not found.']);
 
         $router = new Router($request);
-        $routeList = new RouteListMock;
+        $routeList = new RouteList;
 
         $router->use($routeList);
 
