@@ -31,7 +31,7 @@ class RouteListTest extends TestCase
 
     public function testRoutesCanBeAddedAfterInstantiation()
     {
-        $routeList = new RouteListMock;
+        $routeList = new RouteList;
         
         $routeList->get('/new', fn() => new Response());
         $routeList->routes();
