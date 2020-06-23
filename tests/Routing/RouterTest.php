@@ -93,4 +93,23 @@ class RouterTest extends TestCase
 
         $this->assertEquals($response, $dispatched);
     }
+
+    public function testListenDispatchesMatchingRoute()
+    {
+        $request = Request::create(
+            '/test',
+            'GET'
+        );
+
+        $response = new Response;
+
+        $router = new Router($request);
+        $routeList = new RouteListMock;
+
+        $router->use($routeList);
+
+        $dispatched = $router->listen();
+
+        $this->assertEquals($response, $dispatched);
+    }
 }
