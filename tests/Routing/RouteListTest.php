@@ -2,6 +2,7 @@
 
 namespace Apio\Tests\Routing;
 
+use Apio\Routing\Response;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -24,5 +25,21 @@ class RouteListTest extends TestCase
             $this->assertIsString($route['path']);
             $this->assertIsCallable($route['handler']);
         }
+    }
+
+    public function testRoutesCanBeAddedAfterInstantiation()
+    {
+        $routeList = new RouteListMock;
+        
+        $routeList->get('/new', fn() => new Response());
+        $routeList->routes(new Request());
+
+        $expected = [
+            'method' => 'GET',
+            'path' => '/new',
+            'handler' => fn() => new Response()
+        ];
+
+        $this->assertEquals($expected, $routeList->routeList[0]);
     }
 }
