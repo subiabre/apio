@@ -115,7 +115,7 @@ class Router extends RouteList
 
                 $this->request->query->add($vars);
 
-                $response = $handler($this->request);
+                $response = $handler($this->request, new Response());
 
                 return $response;
         }
