@@ -21,11 +21,8 @@ class Test extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $args = $input->getArguments();
-        unset($args['command']);
+        $output->writeln("<info>> phpunit</info>");
 
-        $output->writeln("> phpunit");
-
-        return (new TextUICommand)->run($args);
+        return (new TextUICommand)->run([]);
     }
 }
