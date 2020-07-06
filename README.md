@@ -22,10 +22,9 @@ $router->get('/', function(Request $request, Response $response) {
     return $response;
 });
 
-$router
-    ->listen()
-    ->send()
-    ;
+$response = $router->dispatch();
+$response->send();
+
 ```
 
 ## Why
