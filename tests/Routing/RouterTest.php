@@ -88,7 +88,7 @@ class RouterTest extends TestCase
 
         $router->use($routeList);
 
-        $dispatched = $router->listen();
+        $dispatched = $router->dispatch();
 
         $this->assertEquals($response, $dispatched);
     }
@@ -108,12 +108,12 @@ class RouterTest extends TestCase
 
         $router->use($routeList);
 
-        $dispatched = $router->listen();
+        $dispatched = $router->dispatch();
 
         $this->assertEquals($response, $dispatched);
     }
 
-    public function testListenDispatchesMatchingRoute()
+    public function testDispatchDispatchesMatchingRoute()
     {
         $request = Request::create(
             '/test',
@@ -127,7 +127,7 @@ class RouterTest extends TestCase
 
         $router->use($routeList);
 
-        $dispatched = $router->listen();
+        $dispatched = $router->dispatch();
 
         $this->assertEquals($response, $dispatched);
     }
@@ -144,7 +144,7 @@ class RouterTest extends TestCase
 
         $router->use($routeList);
 
-        $dispatched = $router->listen();
+        $dispatched = $router->dispatch();
 
         $this->assertInstanceOf(Request::class, $dispatched->requestObj);
         $this->assertInstanceOf(Response::class, $dispatched->responseObj);

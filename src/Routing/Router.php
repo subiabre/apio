@@ -86,7 +86,7 @@ class Router extends RouteList
      * @return Response
      * @throws BadRouteException
      */
-    public function listen(): Response
+    public function dispatch(): Response
     {
         $dispatcher = $this->buildDispatcher();
 
