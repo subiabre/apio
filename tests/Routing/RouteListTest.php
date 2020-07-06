@@ -71,7 +71,7 @@ class RouteListTest extends TestCase
     public function testGetsRouteHandlerFunctionParameters()
     {
         $routeList = new RouteList;
-        $handler = function(Request $request, Response $response, Bag $bag) {
+        $handler = function(Request $request, Response $response, Bag $bag, array $array) {
             $response->bag = $bag;
 
             return $response;
@@ -79,6 +79,7 @@ class RouteListTest extends TestCase
 
         $params = $routeList->getHandlerParams($handler);
 
-        $this->assertSame(Bag::class, $params[2]);
+        $this->assertInstanceOf(Bag::class, $params[2]);
+        $this->assertIsArray($params[3]);
     }
 }
