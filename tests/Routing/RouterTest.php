@@ -6,7 +6,9 @@ use Apio\Routing\AbstractRouteList;
 use Apio\Routing\Response;
 use Apio\Routing\RouteList;
 use Apio\Routing\Router;
+use Apio\Storage\Bag;
 use FastRoute\Dispatcher;
+use FastRoute\Route;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -148,5 +150,24 @@ class RouterTest extends TestCase
 
         $this->assertInstanceOf(Request::class, $dispatched->requestObj);
         $this->assertInstanceOf(Response::class, $dispatched->responseObj);
+    }
+
+    public function testHandlerGetsPassedDynamicParameters()
+    {
+        $request =  $request = Request::create(
+            '/testHandlerParams',
+            'GET'
+        );
+        $router = new Router($request);
+
+        $router->get('/testHandlerParams', function(Response $response, Bag $bag) {
+            $response->bag = $bag;
+
+            return $response;
+        });
+
+        $dispatched = $router->dispatch();
+
+        $this->assertInstanceOf(Bag::class, $dispatched->bag);
     }
 }
