@@ -162,7 +162,7 @@ class RouterTest extends TestCase
         );
         $router = new Router($request);
 
-        $router->get('/testHandlerParams', function(Response $response, Bag $bag) {
+        $router->get('/testHandlerParams', function(Request $request, Response $response, Bag $bag) {
             $response->bag = $bag;
 
             return $response;
