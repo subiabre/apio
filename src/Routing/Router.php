@@ -115,6 +115,7 @@ class Router extends RouteList
                 $vars = $match[2];
 
                 $this->request->query->add($vars);
+                $handlerParams[0] = $this->request;
 
                 $response = \call_user_func_array($handler, $handlerParams);
 
