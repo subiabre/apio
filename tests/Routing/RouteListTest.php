@@ -4,6 +4,7 @@ namespace Apio\Tests\Routing;
 
 use Apio\Routing\Response;
 use Apio\Routing\RouteList;
+use Apio\Storage\Bag;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use TypeError;
@@ -65,5 +66,19 @@ class RouteListTest extends TestCase
         $routeList->routes();
 
         $this->assertEmpty($routeList->routeList);
+    }
+
+    public function testGetsRouteHandlerFunctionParameters()
+    {
+        $routeList = new RouteList;
+        $handler = function(Request $request, Response $response, Bag $bag) {
+            $response->bag = $bag;
+
+            return $response;
+        };
+
+        $params = $routeList->getHandlerParams($handler);
+
+        $this->assertSame(Bag::class, $params[2]);
     }
 }
