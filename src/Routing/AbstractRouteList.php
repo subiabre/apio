@@ -2,6 +2,7 @@
 
 namespace Apio\Routing;
 
+use League\Container\Container;
 use ReflectionFunction;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -16,6 +17,17 @@ abstract class AbstractRouteList
      * @var array
      */
     public $routeList = [];
+
+    /**
+     * Instance of the league container
+     * @var Container
+     */
+    protected $container;
+
+    public function __construct(Container $container = NULL)
+    {
+        $this->container = $container ?: new Container;
+    }
     
     /**
      * Method to be called when the Request matches a route path with an invalid method
@@ -128,7 +140,7 @@ abstract class AbstractRouteList
                     break;
 
                 default:
-                    $parameter = new $parameter;
+                    $parameter = $this->container->get($parameter);
                     break;
             }
 
