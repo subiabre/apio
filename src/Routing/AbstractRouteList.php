@@ -2,7 +2,6 @@
 
 namespace Apio\Routing;
 
-use League\Container\Container;
 use ReflectionFunction;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -96,10 +95,9 @@ abstract class AbstractRouteList
     /**
      * Get the handler parameters as an array
      * @param callable $handler The route handler function
-     * @param Container League container with dependencies
      * @return array
      */
-    public function getHandlerParams(callable $handler, Container $container = NULL): array
+    public function getHandlerParams(callable $handler): array
     {
         $reflectionFn = new ReflectionFunction($handler);
 
@@ -132,8 +130,6 @@ abstract class AbstractRouteList
                 default:
                     if (\class_exists($parameter)) {
                         $parameter = new $parameter;
-
-                        if ($container) $parameter = $container->get($parameter);
                     }
                     break;
             }
