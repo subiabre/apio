@@ -111,11 +111,12 @@ class Router extends RouteList
 
             case Dispatcher::FOUND:
                 $handler = $match[1];
+                $handlerParams = $this->getHandlerParams($handler);
                 $vars = $match[2];
 
                 $this->request->query->add($vars);
 
-                $response = $handler($this->request, new Response());
+                $response = \call_user_func_array($handler, $handlerParams);
 
                 return $response;
         }
