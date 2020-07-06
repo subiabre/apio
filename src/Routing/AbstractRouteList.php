@@ -2,6 +2,7 @@
 
 namespace Apio\Routing;
 
+use ReflectionFunction;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -89,5 +90,23 @@ abstract class AbstractRouteList
     public function delete(string $path, callable $fn)
     {
         $this->addRoute('DELETE', $path, $fn);
+    }
+
+    /**
+     * Get the handler parameters as an array
+     * @param callable $handler The route handler function
+     * @return array
+     */
+    public function getHandlerParams(callable $handler): array
+    {
+        $reflectionFn = new ReflectionFunction($handler);
+
+        $parameters = $reflectionFn->getParameters();
+
+        foreach ($parameters as $key => $param) {
+            $parameters[$key] = (string) $param->getType();
+        }
+
+        return $parameters;
     }
 }
