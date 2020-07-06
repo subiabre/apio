@@ -2,6 +2,7 @@
 
 namespace Apio\Routing;
 
+use ErrorException;
 use ReflectionFunction;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -41,10 +42,18 @@ abstract class AbstractRouteList
      * @param string $method HTTP verb
      * @param string $path Route to match
      * @param callable $fn Handler function
+     * @throws ErrorException if $fn does not return a Response object
      * @return void
      */
     public function addRoute(string $method, string $path, callable $fn): void
     {
+        $returnValue = \call_user_func_array($fn, $this->getHandlerParams($fn));
+
+        if (!\is_a($returnValue, Response::class)) {
+            throw new ErrorException("Handler function can only return a Response type object.", 1);
+            return;
+        }
+
         \array_push($this->routeList, [
             'method' => $method,
             'path' => $path,
