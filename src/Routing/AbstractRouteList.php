@@ -17,17 +17,6 @@ abstract class AbstractRouteList
      * @var array
      */
     public $routeList = [];
-
-    /**
-     * Instance of the league container
-     * @var Container
-     */
-    protected $container;
-
-    public function __construct(Container $container = NULL)
-    {
-        $this->container = $container ?: new Container;
-    }
     
     /**
      * Method to be called when the Request matches a route path with an invalid method
@@ -107,9 +96,10 @@ abstract class AbstractRouteList
     /**
      * Get the handler parameters as an array
      * @param callable $handler The route handler function
+     * @param Container League container with dependencies
      * @return array
      */
-    public function getHandlerParams(callable $handler): array
+    public function getHandlerParams(callable $handler, Container $container = NULL): array
     {
         $reflectionFn = new ReflectionFunction($handler);
 
@@ -140,7 +130,11 @@ abstract class AbstractRouteList
                     break;
 
                 default:
-                    $parameter = $this->container->get($parameter);
+                    if (\class_exists($parameter)) {
+                        $parameter = new $parameter;
+
+                        if ($container) $parameter = $container->get($parameter);
+                    }
                     break;
             }
 
