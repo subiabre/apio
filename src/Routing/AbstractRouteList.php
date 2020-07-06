@@ -106,7 +106,31 @@ abstract class AbstractRouteList
         foreach ($parameters as $key => $param) {
             $parameter = (string) $param->getType();
 
-            if (\class_exists($parameter)) $parameter = new $parameter;
+            switch ($parameter) {
+                case 'bool':
+                    $parameter = (bool) $parameter;
+                    break;
+
+                case 'int':
+                    $parameter = (int) $parameter;
+                    break; 
+                
+                case 'float':
+                    $parameter = (float) $parameter;
+                    break;
+
+                case 'string':
+                    $parameter = (string) $parameter;
+                    break;
+
+                case 'array':
+                    $parameter = (array) $parameter;
+                    break;
+
+                default:
+                    $parameter = new $parameter;
+                    break;
+            }
 
             $parameters[$key] = $parameter;
         }
