@@ -104,7 +104,11 @@ abstract class AbstractRouteList
         $parameters = $reflectionFn->getParameters();
 
         foreach ($parameters as $key => $param) {
-            $parameters[$key] = (string) $param->getType();
+            $parameter = (string) $param->getType();
+
+            if (\class_exists($parameter)) $parameter = new $parameter;
+
+            $parameters[$key] = $parameter;
         }
 
         return $parameters;
