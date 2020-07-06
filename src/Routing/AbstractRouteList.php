@@ -65,6 +65,7 @@ abstract class AbstractRouteList
      * Add a new GET route
      * @param string $path An URI to be matched against
      * @param callable $fn The handler function to be executed
+     * @throws ErrorException if $fn does not return a Response object
      */
     public function get(string $path, callable $fn)
     {
@@ -75,6 +76,7 @@ abstract class AbstractRouteList
      * Add a new POST route
      * @param string $path An URI to be matched against
      * @param callable $fn The handler function to be executed
+     * @throws ErrorException if $fn does not return a Response object
      */
     public function post(string $path, callable $fn)
     {
@@ -85,6 +87,7 @@ abstract class AbstractRouteList
      * Add a new PUT route
      * @param string $path An URI to be matched against
      * @param callable $fn The handler function to be executed
+     * @throws ErrorException if $fn does not return a Response object
      */
     public function put(string $path, callable $fn)
     {
@@ -95,6 +98,7 @@ abstract class AbstractRouteList
      * Add a new DELETE route
      * @param string $path An URI to be matched against
      * @param callable $fn The handler function to be executed
+     * @throws ErrorException if $fn does not return a Response object
      */
     public function delete(string $path, callable $fn)
     {
