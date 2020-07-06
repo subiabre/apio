@@ -5,6 +5,7 @@ namespace Apio\Tests\Routing;
 use Apio\Routing\Response;
 use Apio\Routing\RouteList;
 use Apio\Storage\Bag;
+use ErrorException;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use TypeError;
@@ -46,7 +47,7 @@ class RouteListTest extends TestCase
         $this->assertEquals($expected, $routeList->routeList[0]);
     }
 
-    public function testAllRoutesReturnResponse()
+    public function testAllRoutesTakeRequest()
     {
         $routeList = new RouteListMock;
         $routeList->routes();
@@ -58,6 +59,17 @@ class RouteListTest extends TestCase
 
             $this->assertInstanceOf(Response::class, $response);
         }        
+    }
+
+    public function testAllRoutesReturnResponse()
+    {
+        $routeList = new RouteList;
+
+        $this->expectException(ErrorException::class);
+
+        $routeList->get('testReturnsResponse', function() {
+            return null;
+        });
     }
 
     public function testRouteListContainsNoDefaultRoutes()
