@@ -148,6 +148,8 @@ class RouterTest extends TestCase
 
         $dispatched = $router->dispatch();
 
+        $this->assertSame($request, $dispatched->requestObj);
+
         $this->assertInstanceOf(Request::class, $dispatched->requestObj);
         $this->assertInstanceOf(Response::class, $dispatched->responseObj);
     }
