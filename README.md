@@ -1,19 +1,21 @@
 # Apio
 Minimalist, component-based, extendable library to write better PHP-built web APIs.
 
-Apio is built on top of existing and well-known, tested and trusted solutions of the PHP open source community, and designed to provide a quick and unopinionated workflow.
+Apio is built on top of existing and well-known, tested and trusted solutions of the PHP open source community, and designed to provide a quick and unopinionated workflow based on the [12 factor app](https://www.12factor.net/) methodology.
 
 ## Hello world
 ```php
 # index.php
 <?php
 
+use Apio\Http\Server;
+use Apio\Http\Response;
+use Apio\Http\Request;
 use Apio\Routing\Router;
-use Apio\Routing\Response;
-use Symfony\Component\HttpFoundation\Request;
 
 include 'vendor/autoload.php';
 
+$server = new Server;
 $router = new Router;
 
 $router->get('/', function(Request $request, Response $response) {
@@ -22,8 +24,7 @@ $router->get('/', function(Request $request, Response $response) {
     return $response;
 });
 
-$response = $router->dispatch();
-$response->send();
+$server->listen(3000, $router);
 
 ```
 
