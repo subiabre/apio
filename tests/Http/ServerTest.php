@@ -20,7 +20,7 @@ class ServerTest extends TestCase
             return $response;
         });
 
-        $serverResponse = $server->listen(3000, $router);
+        $serverResponse = $server->listen(['0.0.0.0:3000'], $router);
 
         $this->assertSame($response, $serverResponse);
     }
