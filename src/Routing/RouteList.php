@@ -2,13 +2,15 @@
 
 namespace Apio\Routing;
 
+use Apio\Http\Response;
+
 /**
  * Default implementation for AbstractRouteList
  * @author Subiabre
  */
 class RouteList extends AbstractRouteList
 {
-    public function methodNotAllowed(\Symfony\Component\HttpFoundation\Request $request, array $methods): \Apio\Routing\Response
+    public function methodNotAllowed(\Symfony\Component\HttpFoundation\Request $request, array $methods): \Apio\Http\Response
     {
         $response = new Response();
 
@@ -19,7 +21,7 @@ class RouteList extends AbstractRouteList
         return $response;
     }
 
-    public function routeNotFound(\Symfony\Component\HttpFoundation\Request $request): \Apio\Routing\Response
+    public function routeNotFound(\Symfony\Component\HttpFoundation\Request $request): \Apio\Http\Response
     {
         $response = new Response();
 

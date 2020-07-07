@@ -2,6 +2,7 @@
 
 namespace Apio\Routing;
 
+use Apio\Http\Response;
 use ErrorException;
 use ReflectionFunction;
 use Symfony\Component\HttpFoundation\Request;

@@ -3,12 +3,12 @@
 namespace Apio\Tests\Routing;
 
 use Apio\Routing\AbstractRouteList;
-use Apio\Routing\Response;
+use Apio\Http\Response;
 use Symfony\Component\HttpFoundation\Request;
 
 class RouteListMock extends AbstractRouteList
 {
-    public function methodNotAllowed(\Symfony\Component\HttpFoundation\Request $request, array $methods): \Apio\Routing\Response
+    public function methodNotAllowed(\Symfony\Component\HttpFoundation\Request $request, array $methods): \Apio\Http\Response
     {
         $response = new Response;
 
@@ -19,7 +19,7 @@ class RouteListMock extends AbstractRouteList
         return $response;
     }
 
-    public function routeNotFound(\Symfony\Component\HttpFoundation\Request $request): \Apio\Routing\Response
+    public function routeNotFound(\Symfony\Component\HttpFoundation\Request $request): \Apio\Http\Response
     {
         $response = new Response;
 

@@ -2,7 +2,7 @@
 
 namespace Apio\Tests\Routing;
 
-use Apio\Routing\Response;
+use Apio\Http\Response;
 use Apio\Routing\RouteList;
 use Apio\Storage\Bag;
 use ErrorException;

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Apio\Routing;
+namespace Apio\Http;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 

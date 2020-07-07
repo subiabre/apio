@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Apio\Tests\Routing;
+namespace Apio\Tests\Http;
 
-use Apio\Routing\Response;
+use Apio\Http\Response;
 use PHPUnit\Framework\TestCase;
 
 class ResponseTest extends TestCase

@@ -3,7 +3,7 @@
 namespace Apio\Tests\Routing;
 
 use Apio\Routing\AbstractRouteList;
-use Apio\Routing\Response;
+use Apio\Http\Response;
 use Apio\Routing\RouteList;
 use Apio\Routing\Router;
 use Apio\Storage\Bag;

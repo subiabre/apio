@@ -2,6 +2,7 @@
 
 namespace Apio\Routing;
 
+use Apio\Http\Response;
 use FastRoute\Dispatcher;
 use FastRoute\RouteCollector;
 use Symfony\Component\HttpFoundation\Request;
