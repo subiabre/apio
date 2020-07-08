@@ -21,12 +21,11 @@ class Listener
     }
 
     /**
-     * Run the Amp server in loop
-     * @param callable $fn Handler function to be run inside the Amp loop
+     * Run the Amp server
      */
-    public function run(callable $fn)
+    public function run()
     {
-        Loop::run(function() use ($fn) {
+        Loop::run(function() {
             yield $this->http->start();
 
             // Stop the server when SIGINT is received (this is technically optional, but it is best to call Server::stop()).
