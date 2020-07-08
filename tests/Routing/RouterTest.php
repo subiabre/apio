@@ -13,7 +13,7 @@ class RouterTest extends TestCase{
         $ampRouter = new HttpRouter;
         $router = new Router($ampRouter);
 
-        $this->assertSame($ampRouter, $router->routes);
+        $this->assertSame($ampRouter, $router->handler);
     }
 
     public function testRouteAdditionIsChainable()
