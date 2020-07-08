@@ -10,8 +10,7 @@ class Commands
     public function getCommands(): array
     {
         return [
-            new Test(),
-            new Serve()
+            new Test()
         ];
     }
 }
