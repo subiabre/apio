@@ -28,6 +28,21 @@ class ResponseTest extends TestCase
         $this->assertInstanceOf(Response::class, $data);
     }
 
+    public function testWrapsDataInMajorKey()
+    {
+        $response = new Response;
+
+        $response->error(['test' => 'key'], 400);
+
+        $expected = ['error' => [
+            'test' => 'key'
+        ]];
+
+        $actual = $response->getError();
+
+        $this->assertSame($expected, $actual);
+    }
+
     public function testPushesDataIntoArrays()
     {
         $response = new Response;
