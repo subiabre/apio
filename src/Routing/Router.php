@@ -13,7 +13,7 @@ use Amp\Http\Server\Router as ServerRouter;
 class Router implements RouterInterface, RequestHandlerInterface
 {
     /**
-     * @var ServerObserver
+     * @var ServerRouter
      */
     public $handler;
 
