@@ -36,18 +36,15 @@ class Response
      * Set error response body
      * @param array $body
      * @param int $status
-     * @param bool $json Set body as JSON encoded data
      * @return self
      */
-    public function error(array $body, int $status = 400, bool $json = true): self
+    public function error(array $body, int $status = 400): self
     {
         $this->bodyError = \array_merge($this->bodyError, $body);
 
         $body = ['error' => $this->bodyError];
 
-        if ($json) $body = \json_encode($body);
-
-        $this->serverResponse->setBody($body);
+        $this->serverResponse->setBody(\json_encode($body));
         $this->serverResponse->setStatus($status);
 
         return $this;
@@ -57,18 +54,15 @@ class Response
      * Set data response body
      * @param array $body
      * @param int $status
-     * @param bool $json Set body as JSON encoded data
      * @return self
      */
-    public function data(array $body, int $status = 200, bool $json = true): self
+    public function data(array $body, int $status = 200): self
     {
         $this->bodyData = \array_merge($this->bodyData, $body);
 
         $body = ['data' => $this->bodyData];
 
-        if ($json) $body = \json_encode($body);
-
-        $this->serverResponse->setBody($body);
+        $this->serverResponse->setBody(\json_encode($body));
         $this->serverResponse->setStatus($status);
 
         return $this;
