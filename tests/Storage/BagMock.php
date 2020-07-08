@@ -8,6 +8,10 @@ class BagMock extends Bag
 {
     public $bag;
 
+    public $prop1 = 0;
+
+    public $prop2 = '';
+
     public function __construct()
     {
         $this->bag = new Bag;

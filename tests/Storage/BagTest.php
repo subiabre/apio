@@ -43,13 +43,14 @@ class BagTest extends TestCase
     public function testFromObjectSerialization()
     {
         $bag = new Bag;
+        $bagMock = new BagMock;
 
-        $request = Request::create('/uri', 'GET', ['body' => 'data']);
+        $bag->fromObject($bagMock);
 
-        $bag->fromObject($request);
-
-        $this->assertNotNull($bag->request);
-        $this->assertNotNull($bag->query);
+        $this->assertNotNull($bag->prop1);
+        $this->assertIsInt($bag->prop1);
+        $this->assertNotNull($bag->prop2);
+        $this->assertIsString($bag->prop2);
     }
 
     public function testArraySerialization()
