@@ -3,25 +3,25 @@
 namespace Apio\Routing;
 
 use Amp\Http\Server\RequestHandler\CallableRequestHandler as RequestHandler;
+use Amp\Http\Server\RequestHandler as RequestHandlerInterface;
 use Amp\Http\Server\Router as ServerRouter;
-use Amp\Http\Server\ServerObserver;
 
 /**
  * Add functionality to Amp Router
  * @inheritdoc
  */
-class Router implements RouterInterface
+class Router implements RouterInterface, RequestHandlerInterface
 {
     /**
-     * @var ServerRouter
+     * @var ServerObserver
      */
-    public $routes;
+    public $handler;
 
-    public function __construct(ServerObserver $requestHandler = NULL)
+    public function __construct(ServerRouter $handler = NULL)
     {
-        $requestHandler = $requestHandler ? $requestHandler : new ServerRouter();
+        $handler = $handler ? $handler : new ServerRouter();
 
-        $this->routes = $requestHandler;
+        $this->handler = $handler;
     }
     
     /**
@@ -32,7 +32,7 @@ class Router implements RouterInterface
      */
     public function get(string $uri, callable $fn): self
     {
-        $this->routes->addRoute('GET', $uri, new RequestHandler($fn));
+        $this->handler->addRoute('GET', $uri, new RequestHandler($fn));
 
         return $this;
     }
@@ -45,7 +45,7 @@ class Router implements RouterInterface
      */
     public function post(string $uri, callable $fn): self
     {
-        $this->routes->addRoute('POST', $uri, new RequestHandler($fn));
+        $this->handler->addRoute('POST', $uri, new RequestHandler($fn));
 
         return $this;
     }
@@ -58,7 +58,7 @@ class Router implements RouterInterface
      */
     public function put(string $uri, callable $fn): self
     {
-        $this->routes->addRoute('PUT', $uri, new RequestHandler($fn));
+        $this->handler->addRoute('PUT', $uri, new RequestHandler($fn));
 
         return $this;
     }
@@ -71,8 +71,13 @@ class Router implements RouterInterface
      */
     public function delete(string $uri, callable $fn): self
     {
-        $this->routes->addRoute('DELETE', $uri, new RequestHandler($fn));
+        $this->handler->addRoute('DELETE', $uri, new RequestHandler($fn));
 
         return $this;
+    }
+
+    public function handleRequest(\Amp\Http\Server\Request $request): \Amp\Promise
+    {
+        return $this->handler->handleRequest($request);
     }
 }
