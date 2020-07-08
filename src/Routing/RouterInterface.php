@@ -7,11 +7,11 @@ namespace Apio\Routing;
  */
 interface RouterInterface
 {
-    public function get(string $uri, callable $fn);
+    public function get(string $uri, callable $fn): self;
     
-    public function post(string $uri, callable $fn);
+    public function post(string $uri, callable $fn): self;
     
-    public function put(string $uri, callable $fn);
+    public function put(string $uri, callable $fn): self;
 
-    public function delete(string $uri, callable $fn);
+    public function delete(string $uri, callable $fn): self;
 }
