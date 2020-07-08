@@ -2,26 +2,20 @@
 
 namespace Apio\Tests\Http;
 
-use Apio\Http\Response;
+use Amp\Socket\Server as SocketServer;
 use Apio\Http\Server;
 use Apio\Routing\Router;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\HttpFoundation\Request;
 
 class ServerTest extends TestCase
 {
-    public function testListenReturnsResponse()
+    public function testListenReturnsSocket()
     {
         $server = new Server;
         $router = new Router;
-        $response = new Response;
 
-        $router->get('/', function(Request $request) use ($response){
-            return $response;
-        });
+        $listen = $server->listen(3000, $router);
 
-        $serverResponse = $server->listen(['0.0.0.0:3000'], $router);
-
-        $this->assertSame($response, $serverResponse);
+        $this->assertInstanceOf(SocketServer::class, $listen);
     }
 }
