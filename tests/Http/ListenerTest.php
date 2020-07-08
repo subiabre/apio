@@ -32,6 +32,6 @@ class ListenerTest extends TestCase{
 
         $this->expectException(MultiReasonException::class);
 
-        $http = $listener->run();
+        $listener->run();
     }
 }
