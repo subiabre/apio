@@ -2,7 +2,6 @@
 
 namespace Apio\Tests\Http;
 
-use Amp\Http\Server\HttpServer;
 use Apio\Http\Listener;
 use Apio\Http\Server;
 use Apio\Routing\Router;
