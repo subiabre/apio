@@ -14,7 +14,7 @@ class ServerTest extends TestCase
         $server = new Server;
         $router = new Router;
 
-        $listen = $server->listen(3000, $router);
+        $listen = $server->listen('http://localhost:3000', $router);
 
         $this->assertInstanceOf(SocketServer::class, $listen);
     }
