@@ -16,13 +16,15 @@ class Server
      * Get an Amp server instance with a single socket
      * @param string $address Port number to bind the server socket to
      * @param Router $router Instance of router
-     * @return Server
+     * @return Listener
      */
-    public function listen(string $address, Router $router, NullLogger $logger = NULL): HttpServer
+    public function listen(string $address, Router $router, NullLogger $logger = NULL): Listener
     {
         $sockets = [SocketServer::listen($address)];
         $logger = $logger ? $logger : new NullLogger;
 
-        return new HttpServer($sockets, $router->routes, $logger);
+        $server = new HttpServer($sockets, $router->routes, $logger);
+
+        return new Listener($server);
     }
 }
