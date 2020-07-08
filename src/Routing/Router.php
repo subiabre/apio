@@ -2,9 +2,9 @@
 
 namespace Apio\Routing;
 
-use Amp\Http\Server\RequestHandler;
-use Amp\Http\Server\RequestHandler\CallableRequestHandler;
+use Amp\Http\Server\RequestHandler\CallableRequestHandler as RequestHandler;
 use Amp\Http\Server\Router as ServerRouter;
+use Amp\Http\Server\ServerObserver;
 
 /**
  * Add functionality to Amp Router
@@ -17,7 +17,7 @@ class Router implements RouterInterface
      */
     public $routes;
 
-    public function __construct(RequestHandler $requestHandler = NULL)
+    public function __construct(ServerObserver $requestHandler = NULL)
     {
         $requestHandler = $requestHandler ? $requestHandler : new ServerRouter();
 
@@ -31,7 +31,7 @@ class Router implements RouterInterface
      */
     public function get(string $uri, callable $fn)
     {
-        $this->routes->addRoute('GET', $uri, new CallableRequestHandler($fn));
+        $this->routes->addRoute('GET', $uri, new RequestHandler($fn));
     }
 
     /**
@@ -41,7 +41,7 @@ class Router implements RouterInterface
      */
     public function post(string $uri, callable $fn)
     {
-        $this->routes->addRoute('POST', $uri, new CallableRequestHandler($fn));
+        $this->routes->addRoute('POST', $uri, new RequestHandler($fn));
     }
 
     /**
@@ -51,7 +51,7 @@ class Router implements RouterInterface
      */
     public function put(string $uri, callable $fn)
     {
-        $this->routes->addRoute('PUT', $uri, new CallableRequestHandler($fn));
+        $this->routes->addRoute('PUT', $uri, new RequestHandler($fn));
     }
 
     /**
@@ -61,6 +61,6 @@ class Router implements RouterInterface
      */
     public function delete(string $uri, callable $fn)
     {
-        $this->routes->addRoute('DELETE', $uri, new CallableRequestHandler($fn));
+        $this->routes->addRoute('DELETE', $uri, new RequestHandler($fn));
     }
 }
