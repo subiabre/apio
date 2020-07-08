@@ -100,4 +100,13 @@ class Response
     {
         return ['error' => $this->bodyError];
     }
+
+    /**
+     * Obtain the Amp Response object with the loaded data
+     * @return ServerResponse
+     */
+    public function send(): ServerResponse
+    {
+        return $this->serverResponse;
+    }
 }

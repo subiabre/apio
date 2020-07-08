@@ -2,6 +2,7 @@
 
 namespace Apio\Tests\Http;
 
+use Amp\Http\Server\Response as ServerResponse;
 use Apio\Http\Response;
 use PHPUnit\Framework\TestCase;
 
@@ -44,5 +45,14 @@ class ResponseTest extends TestCase
         $actual = \json_encode($response->getData());
 
         $this->assertSame($expected, $actual);
+    }
+
+    public function testSendReturnsServerResponse()
+    {
+        $response = new Response();
+
+        $server = $response->send();
+
+        $this->assertInstanceOf(ServerResponse::class, $server);
     }
 }
