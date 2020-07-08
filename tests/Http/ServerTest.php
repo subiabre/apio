@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class ServerTest extends TestCase
 {
-    public function testListenReturnsSocket()
+    public function testListenReturnsSelfAndUpdatesSocket()
     {
         $server = new Server;
         $router = new Router;
@@ -17,5 +17,6 @@ class ServerTest extends TestCase
         $listen = $server->listen('localhost:3000', $router);
 
         $this->assertInstanceOf(HttpServer::class, $listen->http);
+        $this->assertInstanceOf(Server::class, $listen);
     }
 }
