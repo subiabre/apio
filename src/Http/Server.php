@@ -5,6 +5,7 @@ namespace Apio\Http;
 use Amp\Http\Server\HttpServer;
 use Amp\Socket\Server as SocketServer;
 use Apio\Routing\Router;
+use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 
 /**
@@ -18,7 +19,7 @@ class Server
      * @param Router $router Instance of router
      * @return Listener
      */
-    public function listen(string $address, Router $router, NullLogger $logger = NULL): Listener
+    public function listen(string $address, Router $router, LoggerInterface $logger = NULL): Listener
     {
         $sockets = [SocketServer::listen($address)];
         $logger = $logger ? $logger : new NullLogger;
