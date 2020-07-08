@@ -41,7 +41,7 @@ class ResponseTest extends TestCase
             'et' => 'al'
         ]]);
 
-        $actual = $response->getContent();
+        $actual = \json_encode($response->getData());
 
         $this->assertSame($expected, $actual);
     }
