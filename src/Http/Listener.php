@@ -4,7 +4,6 @@ namespace Apio\Http;
 
 use Amp\Http\Server\HttpServer;
 use Amp\Loop;
-use Exception;
 
 /**
  * Provides the API to run the server on loop
@@ -29,13 +28,13 @@ class Listener
     {
         Loop::run(function() use ($fn) {
             yield $this->http->start();
-            
-            $fn();
 
             // Stop the server when SIGINT is received (this is technically optional, but it is best to call Server::stop()).
-            Loop::onSignal(SIGINT, function (string $watcherId) {
+            Loop::onSignal(SIGINT, function (string $watcherId) use ($fn) {
                 Loop::cancel($watcherId);
                 yield $this->http->stop();
+
+                $fn();
 
                 echo PHP_EOL;
             });
