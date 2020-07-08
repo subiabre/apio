@@ -5,6 +5,7 @@ namespace Apio\Http;
 use Amp\Http\Server\HttpServer;
 use Amp\Http\Server\RequestHandler;
 use Amp\Socket\Server as SocketServer;
+use Apio\Routing\Router;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 
@@ -23,6 +24,7 @@ class Server
     {
         $sockets = [SocketServer::listen($address)];
         $logger = $logger ? $logger : new NullLogger;
+        $router = $router instanceof Router ? $router->handler : $router;
 
         $server = new HttpServer($sockets, $router, $logger);
 
