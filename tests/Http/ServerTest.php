@@ -16,6 +16,6 @@ class ServerTest extends TestCase
 
         $listen = $server->listen('localhost:3000', $router);
 
-        $this->assertInstanceOf(HttpServer::class, $listen);
+        $this->assertInstanceOf(HttpServer::class, $listen->http);
     }
 }
